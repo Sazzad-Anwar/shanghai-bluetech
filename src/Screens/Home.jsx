@@ -105,7 +105,7 @@ const Home = () => {
                         </svg>
                     </div>
 
-                    <div className="absolute inset-0 z-10">
+                    <div className="absolute inset-0 z-10 lg:block hidden">
                         <div className="flex justify-center items-end lg:ml-80 lg:mr-80 w-full lg:w-auto h-full">
                             <OwlCarousel {...carousel2} className="owl-theme">
                                 <div className="bg-pink  mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown wow">

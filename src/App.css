@@ -509,6 +509,12 @@ body {
     .custom-shape-divider-bottom-1638556171 svg {
         height: 60px;
     }
+
+    .owl-carousel .owl-item img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
 }
 
 .carousel-img {
