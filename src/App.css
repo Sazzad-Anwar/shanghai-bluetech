@@ -2,6 +2,8 @@
 @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css');
 /* Google Icons */
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+/* Roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 .material-icons-outlined {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -27,6 +29,10 @@
     font-feature-settings: 'liga';
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 /* navbar style */
 /* header */
 .header {
@@ -36,7 +42,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 12rem;
-    backdrop-filter: blur(8px);
 }
 .header a {
     text-decoration: none;
@@ -479,8 +484,62 @@
     fill: #d9effc;
 }
 
+.custom-shape-divider-bottom-1638556171 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1638556171 svg {
+    position: relative;
+    display: block;
+    width: calc(153% + 1.3px);
+    height: 181px;
+}
+
+.custom-shape-divider-bottom-1638556171 .shape-fill {
+    fill: #28b7ff;
+}
+
 @media screen and (max-width: 991px) {
-    .custom-shape-divider-bottom-1638383354 svg {
+    .custom-shape-divider-bottom-1638383354 svg,
+    .custom-shape-divider-bottom-1638556171 svg {
         height: 60px;
     }
+}
+
+.carousel-img {
+    height: 475px;
+    width: 330px;
+}
+
+.bottom-underline,
+.footer-link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-underline::after,
+.footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    border-radius: 12px;
+    background-color: #fff;
+}
+.footer-link::after {
+    width: 0%;
+    transition: all 0.2s ease-in-out;
+}
+
+.footer-link:hover::after {
+    color: #fff;
+    width: 50px;
 }

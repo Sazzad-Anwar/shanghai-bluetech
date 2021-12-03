@@ -10,7 +10,6 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #352e3d inset !important;
     box-shadow: 0 0 0 30px #352e3d inset !important;
-    border: 0px solid #352e3d !important;
     border-radius: 0px !important;
     color: #d3cbdb !important;
 }

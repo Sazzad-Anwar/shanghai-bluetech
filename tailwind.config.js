@@ -25,7 +25,9 @@ module.exports = {
       'blurBg': '#00000078',
       "pink": '#EE6C5A',
       "ash": '#53617E',
-      "olive": '#32959B'
+      "olive": '#32959B',
+      "light-blue": '#D9EFFC',
+      "dark-blue": '#28B7FF'
     }),
     extend: {},
   },

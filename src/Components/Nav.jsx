@@ -31,9 +31,11 @@ const Nav = () => {
             let scrollPos = window.scrollY;
             if (scrollPos > 80) {
                 document.querySelector('.header').classList.add('shadow-xl');
+                document.querySelector('.header').classList.add('backdrop-blur-md');
                 document.querySelector('.header').classList.add('border-b');
             } else {
                 document.querySelector('.header').classList.remove('shadow-xl');
+                document.querySelector('.header').classList.remove('backdrop-blur-md');
                 document.querySelector('.header').classList.remove('border-b');
             }
         })
@@ -52,12 +54,12 @@ const Nav = () => {
                 </div>
                 <ul className="menu-items">
                     <li>
-                        <Link to="/" className="menu-item text-lg nav-menu">
+                        <Link to="/" className="menu-item text-lg nav-menu font-semibold">
                             Home
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className="menu-item expand-btn text-lg nav-menu">
+                        <Link to="/" className="menu-item expand-btn text-lg nav-menu font-semibold">
                             Products <i className="bi bi-plus-lg show-on-mobile"></i>
                         </Link>
                         <div className="mega-menu expandable">
@@ -111,25 +113,18 @@ const Nav = () => {
                                     </div>
                                     <h1 className="text-xl font-semibold text-center my-3">Coffee Machine Filters</h1>
                                 </div>
-                                {/* <div className="h-full w-ful text-center group">
-                                    <div className="relative rounded-lg">
-                                        <img
-                                            className="h-60 w-auto transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out overflow-hidden"
-                                            src="/images/new-product-4.png"
-                                            alt="new-product-4"
-                                        />
-                                        <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">Get Started</Link>
-                                        </div>
-                                    </div>
-                                    <h1 className="text-xl font-semibold text-center my-3">Refrigerator Filters</h1>
-                                </div> */}
+
                             </div>
                         </div>
                     </li>
                     <li>
-                        <Link to="/" className="menu-item text-lg nav-menu">
-                            About
+                        <Link to="/" className="menu-item text-lg nav-menu font-semibold">
+                            About Us
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/" className="menu-item text-lg nav-menu font-semibold">
+                            Contact Us
                         </Link>
                     </li>
                 </ul>
