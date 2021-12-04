@@ -66,23 +66,43 @@ const Nav = () => {
                             <div className="content container mx-auto grid grid-cols-6 gap-2">
                                 <ul className="list-none mega-menu-list">
                                     <li>
-                                        <Link to="/" className="py-2 text-lg">Water Filter Pitchers</Link>
+                                        <Link to="/products/water-filter-pitchers" className="py-2 text-lg">Filter Pitchers</Link>
                                     </li>
                                     <li>
-                                        <Link to="/" className="py-2 text-lg">Faucet Mounted Filters</Link>
+                                        <Link to="/products/filter-cartridges" className="py-2 text-lg">Filter Cartridges</Link>
                                     </li>
                                     <li>
-                                        <Link to="/" className="py-2 text-lg">Water Filter Bottles</Link>
+                                        <Link to="/products/glass-pitchers" className="py-2 text-lg">Glass Pitchers</Link>
                                     </li>
                                     <li>
-                                        <Link to="/" className="py-2 text-lg">Refrigerator Water Filters</Link>
+                                        <Link to="/products/rv-filters" className="py-2 text-lg">RV Filters</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/products/refrigerator-filters" className="py-2 text-lg">Refrigerator Filters</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/products/coffee-filters" className="py-2 text-lg">Coffe Filters</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/products/bottle-filters" className="py-2 text-lg">Bottle Filters</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/products/soda-machines" className="py-2 text-lg">Soda Machines</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/products/faucet-mounted-filters" className="py-2 text-lg">Faucet Mounted Filters</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/products/water-dispencers" className="py-2 text-lg">Water Dispencers</Link>
                                     </li>
                                 </ul>
                                 <div className="h-full w-ful text-center group">
                                     <div className="relative rounded-lg">
                                         <img className="h-60 w-auto transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out overflow-hidden" src="/images/new-product-1.png" alt="new-product-1" />
                                         <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">Get Started</Link>
+                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                                <i className="bi bi-eye-fill text-xl px-3"></i>
+                                            </Link>
                                         </div>
                                     </div>
                                     <h1 className="text-xl font-semibold text-center my-3">RV Filters</h1>
@@ -95,7 +115,9 @@ const Nav = () => {
                                             alt="new-product-2"
                                         />
                                         <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">Get Started</Link>
+                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                                <i className="bi bi-eye-fill text-xl px-3"></i>
+                                            </Link>
                                         </div>
                                     </div>
                                     <h1 className="text-xl font-semibold text-center my-3">Water Bottles</h1>
@@ -108,7 +130,9 @@ const Nav = () => {
                                             alt="new-product-3"
                                         />
                                         <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">Get Started</Link>
+                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                                <i className="bi bi-eye-fill text-xl px-3"></i>
+                                            </Link>
                                         </div>
                                     </div>
                                     <h1 className="text-xl font-semibold text-center my-3">Coffee Machine Filters</h1>

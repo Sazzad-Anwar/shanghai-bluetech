@@ -78,6 +78,10 @@ body {
     width: 65%;
 }
 
+.menu-items li:hover > a {
+    color: #6ac9f3;
+}
+
 .mega-menu-list li {
     background-color: transparent;
     padding: 0.5rem 1rem;
@@ -304,6 +308,16 @@ body {
         padding: 1rem 2rem;
     }
 
+    .menu-items li > a.nav-menu::after {
+        right: unset;
+        left: 1rem;
+    }
+
+    .menu-items li:hover a.nav-menu::after {
+        content: '';
+        width: 45px;
+    }
+
     .header .menu-items {
         position: absolute;
         height: calc(100vh - 76px);
@@ -402,6 +416,8 @@ body {
         margin: 0;
     }
 }
+
+/*------------------ menu area style end ----------------------*/
 
 /* owl carousel nav edit */
 /* .owl-carousel .owl-prev {
@@ -504,9 +520,30 @@ body {
     fill: #28b7ff;
 }
 
+.custom-shape-divider-bottom-1638609662 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1638609662 svg {
+    position: relative;
+    display: block;
+    width: calc(138% + 1.3px);
+    height: 132px;
+}
+
+.custom-shape-divider-bottom-1638609662 .shape-fill {
+    fill: #ffffff;
+}
+
 @media screen and (max-width: 991px) {
     .custom-shape-divider-bottom-1638383354 svg,
-    .custom-shape-divider-bottom-1638556171 svg {
+    .custom-shape-divider-bottom-1638556171 svg,
+    .custom-shape-divider-bottom-1638609662 svg {
         height: 60px;
     }
 
@@ -517,10 +554,10 @@ body {
     }
 }
 
-.carousel-img {
+/* .carousel-img {
     height: 475px;
     width: 330px;
-}
+} */
 
 .bottom-underline,
 .footer-link {
@@ -530,7 +567,8 @@ body {
 }
 
 .bottom-underline::after,
-.footer-link::after {
+.footer-link::after,
+.active-footer-link::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -548,4 +586,25 @@ body {
 .footer-link:hover::after {
     color: #fff;
     width: 50px;
+}
+
+.product-img {
+    height: 620px;
+    width: 620px;
+}
+.thumb-area {
+    max-height: 620px;
+    overflow: auto;
+}
+
+@media screen and (max-width: 991px) {
+    .product-img {
+        height: auto;
+        width: auto;
+    }
+    .thumb-area {
+        max-width: 100vw;
+        max-height: auto;
+        overflow: auto;
+    }
 }
