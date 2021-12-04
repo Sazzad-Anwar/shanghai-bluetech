@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/shanghai-bluetech/static/css/main.d0e13258.chunk.css",
+    "main.css": "/shanghai-bluetech/static/css/main.5c531631.chunk.css",
     "main.js": "/shanghai-bluetech/static/js/main.4e37498c.chunk.js",
     "main.js.map": "/shanghai-bluetech/static/js/main.4e37498c.chunk.js.map",
     "runtime-main.js": "/shanghai-bluetech/static/js/runtime-main.4342fd29.js",
@@ -12,14 +12,14 @@
     "static/js/3.c7910740.chunk.js.map": "/shanghai-bluetech/static/js/3.c7910740.chunk.js.map",
     "index.html": "/shanghai-bluetech/index.html",
     "static/css/2.b41a7145.chunk.css.map": "/shanghai-bluetech/static/css/2.b41a7145.chunk.css.map",
-    "static/css/main.d0e13258.chunk.css.map": "/shanghai-bluetech/static/css/main.d0e13258.chunk.css.map",
+    "static/css/main.5c531631.chunk.css.map": "/shanghai-bluetech/static/css/main.5c531631.chunk.css.map",
     "static/js/2.d4851947.chunk.js.LICENSE.txt": "/shanghai-bluetech/static/js/2.d4851947.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4342fd29.js",
     "static/css/2.b41a7145.chunk.css",
     "static/js/2.d4851947.chunk.js",
-    "static/css/main.d0e13258.chunk.css",
+    "static/css/main.5c531631.chunk.css",
     "static/js/main.4e37498c.chunk.js"
   ]
 }
