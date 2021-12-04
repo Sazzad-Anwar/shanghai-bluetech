@@ -1,9 +1,14 @@
-import { Input } from 'antd';
-import { Link, NavLink } from 'react-router-dom';
+import { Input, Tooltip } from 'antd';
+import { Link } from 'react-router-dom';
 import Nav from './Nav';
 const { TextArea } = Input;
 
 const Layout = ({ children, className }) => {
+
+    let goTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     return (
         <div className={className}>
             <Nav />
@@ -68,16 +73,16 @@ const Layout = ({ children, className }) => {
                                     <Link to="/" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">About Us</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <Link to="/" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Contact Us</Link>
+                                    <Link to="/contact-us" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Contact Us</Link>
                                 </li>
                                 <li className="py-2.5">
                                     <Link to="/" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Support</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <Link to="/" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Privacy Policy</Link>
+                                    <Link to="/privacy-policy" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Privacy Policy</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <Link to="/" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Terms & Condition</Link>
+                                    <Link to="/terms-&-condition" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Terms & Condition</Link>
                                 </li>
                             </ul>
                         </div>
@@ -86,34 +91,34 @@ const Layout = ({ children, className }) => {
                             <h1 className="text-white text-2xl font-semibold bottom-underline">Categories</h1>
                             <ul className="list-none mt-8" style={{ columnCount: 2 }}>
                                 <li className="py-2.5 clear-both">
-                                    <NavLink to="/products/water-filter-pitchers" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Filter Pitchers</NavLink>
+                                    <Link to="/products/water-filter-pitchers" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Filter Pitchers</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <NavLink to="/products/filter-cartridges" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Filter Cartridges</NavLink>
+                                    <Link to="/products/filter-cartridges" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Filter Cartridges</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <NavLink to="/products/glass-pitchers" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Glass Pitchers</NavLink>
+                                    <Link to="/products/glass-pitchers" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Glass Pitchers</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <NavLink to="/products/rv-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">RV Filters</NavLink>
+                                    <Link to="/products/rv-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">RV Filters</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <NavLink to="/products/refrigerator-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Refrigerator Filters</NavLink>
+                                    <Link to="/products/refrigerator-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Refrigerator Filters</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <NavLink to="/products/coffee-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Coffe Filters</NavLink>
+                                    <Link to="/products/coffee-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Coffe Filters</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <NavLink to="/products/bottle-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Bottle Filters</NavLink>
+                                    <Link to="/products/bottle-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Bottle Filters</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <NavLink to="/products/soda-machines" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Soda Machines</NavLink>
+                                    <Link to="/products/soda-machines" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Soda Machines</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <NavLink to="/products/faucet-mounted-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Faucet Mounted Filters</NavLink>
+                                    <Link to="/products/faucet-mounted-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Faucet Mounted Filters</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <NavLink to="/products/water-dispencers" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Water Dispencers</NavLink>
+                                    <Link to="/products/water-dispencers" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Water Dispencers</Link>
                                 </li>
 
                             </ul>
@@ -145,8 +150,16 @@ const Layout = ({ children, className }) => {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center items-center h-20">
+                <div className="flex justify-center items-center h-20 w-full">
                     <p className="text-base text-white font-semibold">SHANGHAI BLUETECH © 2021</p>
+                    <Tooltip title="Go Top">
+                        <span
+                            className="material-icons-outlined bg-white text-primary ml-5 p-1 cursor-pointer rounded-full"
+                            onClick={goTop}
+                        >
+                            expand_less
+                        </span>
+                    </Tooltip>
                 </div>
             </footer>
         </div>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -54,14 +55,17 @@ const Nav = () => {
                 </div>
                 <ul className="menu-items">
                     <li>
-                        <Link to="/" className="menu-item text-lg nav-menu font-semibold">
-                            Home
+                        <Link to="/" className="menu-item text-lg nav-menu font-semibold flex items-center">
+                            <i className="bi bi-house-door-fill pr-1"></i>
+                            <span>Home</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className="menu-item expand-btn text-lg nav-menu font-semibold">
-                            Products <i className="bi bi-plus-lg show-on-mobile"></i>
-                        </Link>
+                        <a href="javascript:void(0)" className="menu-item expand-btn text-lg nav-menu font-semibold">
+                            <span className="material-icons-outlined">
+                                blender
+                            </span> Products <i className="bi bi-plus-lg show-on-mobile"></i>
+                        </a>
                         <div className="mega-menu expandable">
                             <div className="content container mx-auto grid grid-cols-6 gap-2">
                                 <ul className="list-none mega-menu-list">
@@ -143,12 +147,16 @@ const Nav = () => {
                     </li>
                     <li>
                         <Link to="/" className="menu-item text-lg nav-menu font-semibold">
-                            About Us
+                            <span className="material-icons-outlined">
+                                water_drop
+                            </span> About Us
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className="menu-item text-lg nav-menu font-semibold">
-                            Contact Us
+                        <Link to="/contact-us" className="menu-item text-lg nav-menu font-semibold">
+                            <span className="material-icons-outlined">
+                                contacts
+                            </span> Contact Us
                         </Link>
                     </li>
                 </ul>

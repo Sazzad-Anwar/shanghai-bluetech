@@ -55,7 +55,7 @@ const Products = () => {
                         <div className="item w-full carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
                             <img
                                 className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                src="/products/Tulip -528.webp" alt="Tulip -528.webp"
+                                src="/products/Tulip-528.webp" alt="Tulip -528.webp"
                             />
 
                             <h1 className="flex py-3 w-full text-white bg-primary text-xl justify-center items-center">
@@ -208,7 +208,7 @@ const Products = () => {
                         <div className="item w-full carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
                             <img
                                 className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                src="/products/Iris Mini-527-2.webp" alt="Iris Mini-527-2.webp"
+                                src="/products/Iris-Mini-527-2.webp" alt="Iris Mini-527-2.webp"
                             />
 
                             <h1 className="flex py-3 w-full text-white bg-primary text-xl justify-center items-center">

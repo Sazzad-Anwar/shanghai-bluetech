@@ -1,7 +1,7 @@
 {
-    "homepage": "http://sazzad-anwar.github.io/shanghai-bluetech",
     "name": "shbluetech",
     "version": "1.1.0",
+    "proxy": "http://localhost:3000/shanghai-bluetech",
     "private": true,
     "dependencies": {
         "@craco/craco": "^6.4.2",
