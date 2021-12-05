@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const Breadcrumb = ({ title, cateogry, setPageTitle, setProductCategory }) => {
+const Breadcrumb = ({ title, cateogry, setPageTitle, setProductCategory, bgImage }) => {
 
     const [breadCrumbTitle, setBreadCrumbTitle] = useState('')
 
@@ -31,7 +31,7 @@ const Breadcrumb = ({ title, cateogry, setPageTitle, setProductCategory }) => {
 
     return (
         <div className=" h-96 py-80 relative" style={{
-            background: 'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/images/breadcrumb-bg.webp) no-repeat center center',
+            background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${bgImage ? bgImage : '/images/breadcrumb-bg.webp'}) no-repeat center center`,
             backgroundSize: 'cover',
         }}>
             <div className="container mx-auto">

@@ -32,11 +32,11 @@ const Nav = () => {
             let scrollPos = window.scrollY;
             if (scrollPos > 80) {
                 document.querySelector('.header').classList.add('shadow-xl');
-                document.querySelector('.header').classList.add('backdrop-blur-md');
+                document.querySelector('.header').classList.add('backdrop-blur-xl');
                 document.querySelector('.header').classList.add('border-b');
             } else {
                 document.querySelector('.header').classList.remove('shadow-xl');
-                document.querySelector('.header').classList.remove('backdrop-blur-md');
+                document.querySelector('.header').classList.remove('backdrop-blur-xl');
                 document.querySelector('.header').classList.remove('border-b');
             }
         })
@@ -61,7 +61,7 @@ const Nav = () => {
                         </Link>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" className="menu-item expand-btn text-lg nav-menu font-semibold">
+                        <a onClick={() => { }} className="menu-item expand-btn text-lg nav-menu font-semibold">
                             <span className="material-icons-outlined">
                                 blender
                             </span> Products <i className="bi bi-plus-lg show-on-mobile"></i>
@@ -144,6 +144,13 @@ const Nav = () => {
 
                             </div>
                         </div>
+                    </li>
+                    <li>
+                        <Link to="/services" className="menu-item text-lg nav-menu font-semibold">
+                            <span className="material-icons-outlined">
+                                support_agent
+                            </span> Services
+                        </Link>
                     </li>
                     <li>
                         <Link to="/" className="menu-item text-lg nav-menu font-semibold">

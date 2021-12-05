@@ -6,6 +6,7 @@ import Product from './Screens/Product';
 import TermsCondition from './Screens/TermsCondition';
 import PrivacyPolicy from './Screens/PrivacyPolicy';
 import ContactUs from './Screens/ContactUs';
+import Service from './Screens/Service';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/terms-&-condition" element={<TermsCondition />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/contact-us" element={<ContactUs />} />
+      <Route path="/services" element={<Service />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

@@ -76,7 +76,7 @@ const Layout = ({ children, className }) => {
                                     <Link to="/contact-us" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Contact Us</Link>
                                 </li>
                                 <li className="py-2.5">
-                                    <Link to="/" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Support</Link>
+                                    <Link to="/services" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Services</Link>
                                 </li>
                                 <li className="py-2.5">
                                     <Link to="/privacy-policy" className="text-white text-lg footer-link transition duration-200 ease-in-out hover:text-white">Privacy Policy</Link>
