@@ -88,7 +88,7 @@ const Product = () => {
 
                             </div>
                         </div>
-                        <div className="mx-4">
+                        <div className="lg:mx-4">
                             <h1 className="text-gray-600 text-xl lg:text-3xl font-semibold text-left pb-10">
                                 {productCategory} {pageTitle}
                             </h1>

@@ -15,7 +15,7 @@ const ContactUs = () => {
             <section className="mt-5 mb-20">
                 <div className="container mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-                        <div className="flex w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInUp wow">
+                        <div className="flex w-auto lg:w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInUp wow">
                             <img className="h-32" src="/images/2.png" alt="1" />
                             <div className="ml-3 mt-5">
                                 <h1
@@ -38,7 +38,7 @@ const ContactUs = () => {
                             </div>
                         </div>
 
-                        <div className="flex w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInUp wow">
+                        <div className="flex w-auto lg:w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInUp wow">
                             <img className="h-32" src="/images/5.png" alt="1" />
                             <div className="ml-3 mt-5">
                                 <h1
@@ -61,7 +61,7 @@ const ContactUs = () => {
                             </div>
                         </div>
 
-                        <div className="flex w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInUp wow">
+                        <div className="flex w-auto lg:w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInUp wow">
                             <img className="h-32" src="/images/3.png" alt="1" />
                             <div className="ml-3 mt-5">
                                 <h1
@@ -84,7 +84,7 @@ const ContactUs = () => {
                             </div>
                         </div>
 
-                        <div className="flex w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInDown wow">
+                        <div className="flex w-auto lg:w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInDown wow">
                             <img className="h-32" src="/images/5.png" alt="1" />
                             <div className="ml-3 mt-5">
                                 <h1
@@ -107,7 +107,7 @@ const ContactUs = () => {
                             </div>
                         </div>
 
-                        <div className="flex w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInDown wow">
+                        <div className="flex w-auto lg:w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInDown wow">
                             <img className="h-32" src="/images/1.png" alt="1" />
                             <div className="ml-3 mt-5">
                                 <h1
@@ -130,7 +130,7 @@ const ContactUs = () => {
                             </div>
                         </div>
 
-                        <div className="flex w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInDown wow">
+                        <div className="flex w-auto lg:w-96 p-4 border shadow-lg hover:shadow-2xl rounded-xl transition duration-300 ease-in-out animate__animated animate__fadeInDown wow">
                             <img className="h-32" src="/images/4.png" alt="1" />
                             <div className="ml-3 mt-5">
                                 <h1
