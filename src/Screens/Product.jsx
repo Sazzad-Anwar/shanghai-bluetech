@@ -1,6 +1,6 @@
 import Layout from './../Components/Layout';
 import Breadcrumb from './../Components/Breadcrumb';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router';
 import OwlCarousel from 'react-owl-carousel';
 import { Link } from 'react-router-dom';
@@ -11,11 +11,6 @@ const Product = () => {
     const [productCategory, setProductCategory] = useState('')
     const [currentImage, setCurrentImage] = useState('/images/Violet.png');
     const { product, category } = useParams();
-
-    useEffect(() => {
-        document.title = 'Bluetech | ' + pageTitle;
-    }, [pageTitle]);
-
 
     let carousel3 = {
         margin: 15,

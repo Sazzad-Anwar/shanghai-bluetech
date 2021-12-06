@@ -5,7 +5,6 @@ const Breadcrumb = ({ title, cateogry, setPageTitle, setProductCategory, bgImage
     const [breadCrumbTitle, setBreadCrumbTitle] = useState('')
 
     useEffect(() => {
-
         const capitalize = (word) => {
             let wordArray = word.split('-')
             let newArry = []
@@ -25,6 +24,7 @@ const Breadcrumb = ({ title, cateogry, setPageTitle, setProductCategory, bgImage
         if (setProductCategory) {
             setProductCategory(capitalize(cateogry));
         }
+        document.title = 'Bluetech | ' + capitalize(title);
 
     }, [cateogry, setPageTitle, setProductCategory, title])
 

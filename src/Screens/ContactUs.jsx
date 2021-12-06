@@ -1,12 +1,7 @@
-import { useEffect } from "react";
 import Layout from './../Components/Layout';
 import Breadcrumb from './../Components/Breadcrumb';
 
 const ContactUs = () => {
-
-    useEffect(() => {
-        document.title = 'Bluetech | Contact Us';
-    }, []);
 
     return (
         <Layout>

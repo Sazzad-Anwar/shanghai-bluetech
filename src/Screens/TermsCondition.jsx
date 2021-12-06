@@ -5,7 +5,7 @@ import Breadcrumb from './../Components/Breadcrumb';
 const TermsCondition = () => {
 
     useEffect(() => {
-        document.title = 'Bluetech | Terms & Conditions';
+
     }, []);
 
     return (

@@ -1,13 +1,8 @@
 import Layout from './../Components/Layout';
 import Breadcrumb from './../Components/Breadcrumb';
-import { useEffect } from 'react';
 import { Timeline } from 'antd';
 
 const Service = () => {
-
-    useEffect(() => {
-        document.title = 'Bluetech | Services';
-    }, [])
 
     return (
         <Layout>

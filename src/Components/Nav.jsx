@@ -153,7 +153,7 @@ const Nav = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/" className="menu-item text-lg nav-menu font-semibold">
+                        <Link to="/about-us" className="menu-item text-lg nav-menu font-semibold">
                             <span className="material-icons-outlined">
                                 water_drop
                             </span> About Us

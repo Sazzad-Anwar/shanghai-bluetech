@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Breadcrumb from '../Components/Breadcrumb';
 import Layout from '../Components/Layout';
@@ -6,10 +6,6 @@ import Layout from '../Components/Layout';
 const Products = () => {
     const [pageTitle, setPageTitle] = useState('')
     const { category } = useParams();
-
-    useEffect(() => {
-        document.title = 'Bluetech | ' + pageTitle;
-    }, [pageTitle])
 
     return (
         <Layout>
