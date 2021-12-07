@@ -4,7 +4,7 @@ import Breadcrumb from './../Components/Breadcrumb';
 const AboutUs = () => {
     return (
         <Layout>
-            <Breadcrumb title="about-us" />
+            <Breadcrumb title="about-us" bgImage="/images/about-bluetech.jpg" />
 
             <section className="my-10">
                 <div className="container mx-auto">

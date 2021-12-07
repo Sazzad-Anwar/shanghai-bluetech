@@ -124,19 +124,19 @@ const Home = () => {
                     <div className="absolute inset-0 z-10 lg:block hidden">
                         <div className="flex justify-center items-end lg:ml-80 lg:mr-80 w-full lg:w-auto h-full">
                             <OwlCarousel {...carousel2} className="owl-theme">
-                                <div className="bg-pink mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
+                                <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
                                     <div>
                                         <img className="h-20" src="/images/filter_icon.svg" alt="filter-icon" />
                                     </div>
                                     <h1 className="text-lg font-bold text-center text-white uppercase">Replacement filter cartridges </h1>
                                 </div>
-                                <div className="bg-ash  mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown animate__delay-1s wow">
+                                <div className="bg-primary  mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown animate__delay-1s wow">
                                     <div>
                                         <img className="h-20" src="/images/setup_brita_icon.svg" alt="filter-icon" />
                                     </div>
                                     <h1 className="text-lg font-bold text-center text-white uppercase">Water filter pitchers </h1>
                                 </div>
-                                <div className="bg-olive  mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown animate__delay-2s wow">
+                                <div className="bg-primary  mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown animate__delay-2s wow">
                                     <div>
                                         <img className="h-20" src="/images/compare_icon.svg" alt="filter-icon" />
                                     </div>
@@ -273,7 +273,7 @@ const Home = () => {
                 <section className="my-20">
                     <div className="container mx-auto">
                         <h1 className="text-xl lg:text-3xl text-gray-600 font-bold text-center">Testimonials</h1>
-                        <div className="my-6 mx-2 sm:mx-6 md:mx-12 lg:22 xl:mx-44 lg:my-20">
+                        <div className="my-6 sm:mx-6 md:mx-12 lg:22 xl:mx-44 lg:my-20">
                             <Tabs tabPosition={isMobile ? 'top' : 'left'} className="shadow-lg border rounded-lg p-2 lg:px-6 lg:py-20">
                                 <TabPane tab="Massive Production" className="text-center" key="1">
                                     <div className="py-4">

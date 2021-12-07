@@ -62,9 +62,15 @@ const Nav = () => {
                     </li>
                     <li>
                         <a onClick={() => { }} className="menu-item expand-btn text-lg nav-menu font-semibold">
-                            <span className="material-icons-outlined">
-                                blender
-                            </span> Products <i className="bi bi-plus-lg show-on-mobile"></i>
+                            <div className="flex items-center">
+                                <span className="material-icons-outlined">
+                                    blender
+                                </span>
+                                <span>
+                                    Products
+                                </span>
+                            </div>
+                            <i className="bi bi-plus-lg show-on-mobile"></i>
                         </a>
                         <div className="mega-menu expandable">
                             <div className="content container mx-auto grid grid-cols-6 gap-2">
@@ -147,23 +153,38 @@ const Nav = () => {
                     </li>
                     <li>
                         <Link to="/services" className="menu-item text-lg nav-menu font-semibold">
-                            <span className="material-icons-outlined">
-                                support_agent
-                            </span> Services
+                            <div className="flex items-center">
+                                <span className="material-icons-outlined">
+                                    support_agent
+                                </span>
+                                <span>
+                                    Services
+                                </span>
+                            </div>
                         </Link>
                     </li>
                     <li>
                         <Link to="/about-us" className="menu-item text-lg nav-menu font-semibold">
-                            <span className="material-icons-outlined">
-                                water_drop
-                            </span> About Us
+                            <div className="flex items-center">
+                                <span className="material-icons-outlined">
+                                    water_drop
+                                </span>
+                                <span>
+                                    About Us
+                                </span>
+                            </div>
                         </Link>
                     </li>
                     <li>
                         <Link to="/contact-us" className="menu-item text-lg nav-menu font-semibold">
-                            <span className="material-icons-outlined">
-                                contacts
-                            </span> Contact Us
+                            <div className="flex items-center">
+                                <span className="material-icons-outlined">
+                                    contacts
+                                </span>
+                                <span>
+                                    Contact Us
+                                </span>
+                            </div>
                         </Link>
                     </li>
                 </ul>
