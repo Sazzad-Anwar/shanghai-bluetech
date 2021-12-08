@@ -29,7 +29,11 @@ module.exports = {
       "light-blue": '#D9EFFC',
       "dark-blue": '#28B7FF'
     }),
-    extend: {},
+    extend: {
+      spacing: {
+        "800": "50rem"
+      },
+    },
   },
   variants: {
     extend: {},

@@ -3,6 +3,10 @@
 @tailwind utilities;
 @import '~antd/dist/antd.css';
 
+.card-image {
+    @apply filter scale-100 group-hover:scale-110 transition duration-500 ease-in-out;
+}
+
 /* ant Design setup with tailwindcss */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

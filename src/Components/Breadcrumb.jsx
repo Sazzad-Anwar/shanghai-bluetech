@@ -31,7 +31,7 @@ const Breadcrumb = ({ title, cateogry, setPageTitle, setProductCategory, bgImage
 
     return (
         <div className=" h-96 py-80 relative" style={{
-            background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${bgImage ? bgImage : '/images/breadcrumb-bg.webp'}) no-repeat center center`,
+            background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${bgImage ? bgImage : '/images/breadcrumb-bg.webp'}) no-repeat top center`,
             backgroundSize: 'cover',
         }}>
             <div className="container mx-auto">
