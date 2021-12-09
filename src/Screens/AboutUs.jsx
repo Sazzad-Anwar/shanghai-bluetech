@@ -1,9 +1,10 @@
 import Layout from './../Components/Layout';
 import Breadcrumb from './../Components/Breadcrumb';
 import OwlCarousel from 'react-owl-carousel';
-import { Tabs } from 'antd';
+import { Tabs, Steps, Image } from 'antd';
 
 const { TabPane } = Tabs;
+const { Step } = Steps;
 
 const AboutUs = () => {
 
@@ -31,6 +32,73 @@ const AboutUs = () => {
             1400: {
                 items: 4,
                 loop: true
+            }
+        }
+    }
+
+    let carousel2 = {
+
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        dots: false,
+        animateOut: 'animate__backOutLeft',
+        animateIn: 'animate__fadeInRight',
+        responsive: {
+            0: {
+                items: 1,
+                loop: true,
+                margin: 50
+            },
+            600: {
+                items: 1,
+                loop: true,
+            },
+            1024: {
+                items: 2,
+                loop: true,
+                margin: 10,
+            },
+            1280: {
+                items: 3,
+                loop: true,
+                margin: 10,
+            },
+            1400: {
+                items: 4,
+                loop: true,
+                margin: 10,
+            }
+        }
+    }
+
+    let carousel3 = {
+
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        dots: false,
+        animateOut: 'animate__backOutLeft',
+        animateIn: 'animate__fadeInRight',
+        responsive: {
+            0: {
+                items: 1,
+                margin: 50
+            },
+            600: {
+                items: 1,
+            },
+            1024: {
+                items: 2,
+                margin: 10,
+            },
+            1280: {
+                items: 3,
+                margin: 10,
+            },
+            1400: {
+                items: 5,
+                margin: 10,
             }
         }
     }
@@ -142,7 +210,7 @@ const AboutUs = () => {
                         </TabPane>
                         <TabPane tab="2003-01" key="2003-01">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                <img src="/images/time-line-2.png" alt="time-line-1" />
+                                <img className="rounded-xl" src="/images/time-line-2.png" alt="time-line-1" />
                                 <div className="p-0 lg:p-8 flex flex-col justify-center">
                                     <p className="text-base text-tertiary font-semibold my-2">2003-01</p>
                                     <h1 className="text-xl lg:text-2xl font-bold">Company formation</h1>
@@ -152,7 +220,7 @@ const AboutUs = () => {
                         </TabPane>
                         <TabPane tab="2008-01" key="2008-01">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                <img src="/images/time-line-3.png" alt="time-line-1" />
+                                <img className="rounded-xl" src="/images/time-line-3.png" alt="time-line-1" />
                                 <div className="p-0 lg:p-8 flex flex-col justify-center">
                                     <p className="text-base text-tertiary font-semibold my-2">2008-01</p>
                                     <h1 className="text-xl lg:text-2xl font-bold">Bluetech became a high-tech company</h1>
@@ -161,6 +229,149 @@ const AboutUs = () => {
                             </div>
                         </TabPane>
                     </Tabs>
+                </div>
+            </section>
+
+            {/* what can we do */}
+            <section className="my-20 py-20 bg-light-blue">
+                <div className="container mx-auto">
+                    <h1 className="text-gray-600 text-2xl lg:text-4xl font-semibold text-center my-10">
+                        What can we do?
+                    </h1>
+
+                    <OwlCarousel {...carousel2} className="owl-theme mx-auto">
+                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
+                            <div className='p-5 text-center'>
+                                <span className="material-icons-outlined p-3 bg-dark-blue text-white rounded-full text-2xl text-center">
+                                    design_services
+                                </span>
+                            </div>
+                            <div className="h-20">
+                                <p className='px-3 text-lg font-semibold text-center'>
+                                    OEM production of available designs
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
+                            <div className='p-5 text-center'>
+                                <span className="material-icons-outlined p-3 bg-dark-blue text-white rounded-full text-2xl text-center">
+                                    hourglass_bottom
+                                </span>
+                            </div>
+                            <div className="h-20">
+                                <p className='px-3 text-lg font-semibold text-center'>
+                                    Production in required time and quantity
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
+                            <div className='p-5 text-center'>
+                                <span className="material-icons-outlined p-3 bg-dark-blue text-white rounded-full text-2xl text-center">
+                                    flight_takeoff
+                                </span>
+                            </div>
+                            <div className="h-20">
+                                <p className='px-3 text-lg font-semibold text-center'>
+                                    Ensure production and shipment quality
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
+                            <div className='p-5 text-center'>
+                                <span className="material-icons-outlined p-3 bg-dark-blue text-white rounded-full text-2xl text-center">
+                                    place
+                                </span>
+                            </div>
+                            <div className="h-20">
+                                <p className='px-3 text-lg font-semibold text-center'>
+                                    Keep track of the product for the customer during shipment
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
+                            <div className='p-5 text-center'>
+                                <span className="material-icons-outlined p-3 bg-dark-blue text-white rounded-full text-2xl text-center">
+                                    support_agent
+                                </span>
+                            </div>
+                            <div className="h-20">
+                                <p className='px-3 text-lg font-semibold text-center'>
+                                    Provide technical support for customers after sales
+                                </p>
+                            </div>
+                        </div>
+                    </OwlCarousel>
+
+                    <div className='my-10 p-5 shadow-xl border-2 border-white rounded-xl text-center'>
+                        <Steps size="small" current={8}>
+                            <Step title={<span className='font-semibold'>Choose Your design</span>} />
+                            <Step title={<span className='font-semibold'>Cost estimation</span>} />
+                            <Step title={<span className='font-semibold'>Design confirmation</span>} />
+                            <Step title={<span className='font-semibold'>Orders and payment</span>} />
+                            <Step title={<span className='font-semibold'>Transaction completion</span>} />
+                            <Step title={<span className='font-semibold'>Sales and logistic operation</span>} />
+                            <Step title={<span className='font-semibold'>Shipment arrived</span>} />
+                            <Step title={<span className='font-semibold'>Enjoy cleaner water</span>} />
+                        </Steps>
+                    </div>
+                </div>
+            </section>
+
+            {/* what can we do */}
+            <section className="my-20">
+                <div className="container mx-auto">
+                    <h1 className="text-gray-600 text-2xl lg:text-4xl font-semibold text-center my-10">
+                        Partners
+                    </h1>
+
+                    <OwlCarousel {...carousel2} className="owl-theme mx-auto">
+                        <div className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
+                            <img className='h-auto flex rounded-lg' src="/images/amazon.png" alt="amazon" />
+                        </div>
+                        <div className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
+                            <img className='h-auto flex rounded-lg' src="/images/walmart.png" alt="walmart" />
+                        </div>
+                        <div className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
+                            <img className='h-auto flex rounded-lg' src="/images/alibaba.svg" alt="alibaba" />
+                        </div>
+                        <div className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
+                            <img className='h-auto flex rounded-lg' src="/images/PayPal.svg" alt="paypal" />
+                        </div>
+                    </OwlCarousel>
+                </div>
+            </section>
+
+            {/* what can we do */}
+            <section className="my-20 py-20 bg-light-blue">
+                <div className="container mx-auto">
+                    <h1 className="text-gray-600 text-2xl lg:text-4xl font-semibold text-center my-10">
+                        Company's Achievement and Certifiacations
+                    </h1>
+
+                    <OwlCarousel {...carousel3} className="owl-theme md:mx-auto">
+                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
+                            <Image className='h-96 w-full rounded-lg' src="/images/cert-1.png" alt="cert-1" />
+                        </div>
+                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
+                            <Image className='h-96 w-full rounded-lg' src="/images/cert-2.png" alt="cert-2" />
+                        </div>
+                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
+                            <Image className='h-96 w-full rounded-lg' src="/images/cert-3.png" alt="cert-3" />
+                        </div>
+                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
+                            <Image className='h-96 w-full rounded-lg' src="/images/cert-4.png" alt="cert-4" />
+                        </div>
+                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
+                            <Image className='h-96 w-full rounded-lg' src="/images/cert-5.png" alt="cert-5" />
+                        </div>
+                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
+                            <Image className='h-96 w-full rounded-lg' src="/images/cert-6.png" alt="cert-6" />
+                        </div>
+                    </OwlCarousel>
                 </div>
             </section>
         </Layout>

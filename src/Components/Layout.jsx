@@ -1,6 +1,7 @@
 import { Input, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
+import { CopyrightOutlined } from '@ant-design/icons'
 const { TextArea } = Input;
 
 const Layout = ({ children, className }) => {
@@ -151,7 +152,7 @@ const Layout = ({ children, className }) => {
                     </div>
                 </div>
                 <div className="flex justify-center items-center h-20 w-full">
-                    <p className="text-base text-white font-semibold">SHANGHAI BLUETECH © 2021</p>
+                    <p className="text-base text-white font-semibold">SHANGHAI BLUETECH <CopyrightOutlined className="text-lg" /> {new Date().getFullYear()}</p>
                     <Tooltip title="Go Top">
                         <span
                             className="material-icons-outlined bg-white text-primary ml-5 p-1 cursor-pointer rounded-full"

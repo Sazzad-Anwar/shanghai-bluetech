@@ -197,74 +197,6 @@ const Home = () => {
                                     </div>
                                 </div>
                             ))}
-
-
-                            {/* <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-6.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-7.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-8.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-9.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-10.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-11.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div> */}
                         </OwlCarousel>
                     </div>
                 </section>
@@ -274,7 +206,7 @@ const Home = () => {
                     <div className="container mx-auto">
                         <h1 className="text-xl lg:text-3xl text-gray-600 font-bold text-center">Testimonials</h1>
                         <div className="my-6 sm:mx-6 md:mx-12 lg:22 xl:mx-44 lg:my-20">
-                            <Tabs tabPosition={isMobile ? 'top' : 'left'} className="shadow-lg border rounded-lg p-2 lg:px-6 lg:py-20">
+                            <Tabs size='large' tabPosition={isMobile ? 'top' : 'left'} className="shadow-lg border rounded-lg p-2 lg:px-6 lg:py-20">
                                 <TabPane tab="Massive Production" className="text-center" key="1">
                                     <div className="py-4">
                                         <h1 className="text-xl lg:text-2xl font-bold">Big Production Capacity</h1>
@@ -346,50 +278,6 @@ const Home = () => {
                                     </div>
                                 </div>
                             ))}
-                            {/* <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-12.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-13.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-14.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="item w-full carousel-img border rounded-2xl shadow-xl overflow-hidden mx-auto flex justify-center items-center lg:block lg:w-auto relative group">
-                                <img
-                                    className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                    src="/images/p-15.webp" alt="p-12"
-                                />
-                                <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                    <Link to="/" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                        <i className="bi bi-eye-fill text-xl px-3"></i>
-                                    </Link>
-                                </div>
-                            </div> */}
                         </OwlCarousel>
                     </div>
                 </section>
