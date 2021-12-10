@@ -182,7 +182,7 @@ const Home = () => {
                             {[6, 7, 8, 9, 10, 12].map((item, index) => (
                                 <div className="item w-full h-80 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
                                     <img
-                                        className="transform scale-100 w- h-72 group-hover:scale-110 transition duration-150 ease-in-out"
+                                        className="transform scale-100  h-72 group-hover:scale-110 transition duration-150 ease-in-out"
                                         src={`/images/p-${item}.webp`} alt={`p-${item}`}
                                     />
 
