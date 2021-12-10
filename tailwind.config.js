@@ -28,7 +28,8 @@ module.exports = {
     }),
     extend: {
       spacing: {
-        "800": "50rem"
+        "800": "50rem",
+        "500": "31.2"
       },
     },
   },

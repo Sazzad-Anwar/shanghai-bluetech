@@ -626,6 +626,10 @@ body {
     overflow: auto;
 }
 
+/* .owl-carousel .owl-item img {
+    width: auto !important;
+} */
+
 @media screen and (max-width: 991px) {
     .product-img {
         height: auto;
