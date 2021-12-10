@@ -187,6 +187,11 @@ const Nav = () => {
                             </div>
                         </Link>
                     </li>
+                    <li>
+                        <a onClick={() => { }} className=''>
+                            <div className='bg-transparent rounded-xl border px-3 active:outline-none focus:outline-none h-7 overflow-hidden' id="google_translate_element"></div>
+                        </a>
+                    </li>
                 </ul>
             </header>
             {/* <div style={{ minHeight: 80 }}></div> */}
