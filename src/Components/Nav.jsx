@@ -56,16 +56,12 @@ const Nav = () => {
                 <ul className="menu-items">
                     <li>
                         <Link to="/" className="menu-item text-lg nav-menu font-semibold flex items-center">
-                            <i className="bi bi-house-door-fill pr-1"></i>
                             <span>Home</span>
                         </Link>
                     </li>
                     <li>
                         <a onClick={() => { }} className="menu-item expand-btn text-lg nav-menu font-semibold">
                             <div className="flex items-center">
-                                <span className="material-icons-outlined">
-                                    blender
-                                </span>
                                 <span>
                                     Products
                                 </span>
@@ -110,7 +106,7 @@ const Nav = () => {
                                     <div className="relative rounded-lg">
                                         <img className="h-60 w-auto transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out overflow-hidden" src="/images/new-product-1.png" alt="new-product-1" />
                                         <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                            <Link to="/products/water-filter-pitchers/Violet-529" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
                                                 <i className="bi bi-eye-fill text-xl px-3"></i>
                                             </Link>
                                         </div>
@@ -125,7 +121,7 @@ const Nav = () => {
                                             alt="new-product-2"
                                         />
                                         <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                            <Link to="/products/water-filter-pitchers/Violet-529" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
                                                 <i className="bi bi-eye-fill text-xl px-3"></i>
                                             </Link>
                                         </div>
@@ -140,7 +136,7 @@ const Nav = () => {
                                             alt="new-product-3"
                                         />
                                         <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                            <Link to="/" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                            <Link to="/products/water-filter-pitchers/Violet-529" className="rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
                                                 <i className="bi bi-eye-fill text-xl px-3"></i>
                                             </Link>
                                         </div>
@@ -154,9 +150,6 @@ const Nav = () => {
                     <li>
                         <Link to="/services" className="menu-item text-lg nav-menu font-semibold">
                             <div className="flex items-center">
-                                <span className="material-icons-outlined">
-                                    support_agent
-                                </span>
                                 <span>
                                     Services
                                 </span>
@@ -166,9 +159,6 @@ const Nav = () => {
                     <li>
                         <Link to="/about-us" className="menu-item text-lg nav-menu font-semibold">
                             <div className="flex items-center">
-                                <span className="material-icons-outlined">
-                                    bookmark
-                                </span>
                                 <span>
                                     About Us
                                 </span>
@@ -178,9 +168,6 @@ const Nav = () => {
                     <li>
                         <Link to="/contact-us" className="menu-item text-lg nav-menu font-semibold">
                             <div className="flex items-center">
-                                <span className="material-icons-outlined">
-                                    contacts
-                                </span>
                                 <span>
                                     Contact Us
                                 </span>
