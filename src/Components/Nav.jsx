@@ -167,7 +167,7 @@ const Nav = () => {
                         <Link to="/about-us" className="menu-item text-lg nav-menu font-semibold">
                             <div className="flex items-center">
                                 <span className="material-icons-outlined">
-                                    water_drop
+                                    bookmark
                                 </span>
                                 <span>
                                     About Us
