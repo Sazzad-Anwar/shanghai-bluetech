@@ -32,7 +32,7 @@ module.exports = {
         "82": "21.875rem"
       },
       width: {
-        "63": "15.625rem"
+        "63": "15.625rem !important",
       }
     },
   },

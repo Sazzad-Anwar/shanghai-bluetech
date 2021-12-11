@@ -13,7 +13,7 @@ const Products = () => {
             <section className="my-10">
                 <div className="container mx-auto">
                     <h1 className="text-gray-600 text-xl lg:text-4xl font-semibold text-center pb-10">{pageTitle}</h1>
-                    <div className="grid grid-cols-1 mb-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-x-4 gap-y-4 sm:gap-x-4 sm:gap-y-6">
+                    <div className="grid grid-cols-1 mb-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-4 sm:gap-x-4 sm:gap-y-6">
                         <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
                             <img
                                 className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"

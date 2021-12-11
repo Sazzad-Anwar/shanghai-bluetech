@@ -50,7 +50,7 @@ const Home = () => {
     }
 
     let carousel3 = {
-        margin: 35,
+        margin: 10,
         autoplay: true,
         autoplayTimeout: 3000,
         autoplayHoverPause: true,
