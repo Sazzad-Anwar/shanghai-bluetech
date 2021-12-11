@@ -155,10 +155,10 @@ const Layout = ({ children, className }) => {
                     <p className="text-base text-white font-semibold">SHANGHAI BLUETECH <CopyrightOutlined className="text-lg" /> {new Date().getFullYear()}</p>
                     <Tooltip title="Go Top">
                         <span
-                            className="material-icons-outlined bg-white text-primary ml-5 p-1 cursor-pointer rounded-full"
+                            className="bg-white text-primary ml-5 px-3 py-2 cursor-pointer rounded-full"
                             onClick={goTop}
                         >
-                            expand_less
+                            <i class="bi bi-chevron-up"></i>
                         </span>
                     </Tooltip>
                 </div>

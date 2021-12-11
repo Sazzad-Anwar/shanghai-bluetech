@@ -242,7 +242,9 @@ const AboutUs = () => {
                     <OwlCarousel {...carousel2} className="owl-theme mx-auto">
                         <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
                             <div className='p-5 text-center flex justify-center items-center'>
-                                <img className='h-12 w-12 p-3 rounded-full bg-dark-blue' src="/images/design.png" alt="design" />
+                                <div className="h-12 w-12">
+                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/design.png" alt="design" />
+                                </div>
                             </div>
                             <div className="h-20">
                                 <p className='px-3 text-lg font-semibold text-center'>
@@ -253,7 +255,9 @@ const AboutUs = () => {
 
                         <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
                             <div className='p-5 text-center flex justify-center items-center'>
-                                <img className='h-12 w-12 p-3 rounded-full bg-dark-blue' src="/images/time.png" alt="time" />
+                                <div className="h-12 w-12">
+                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/time.png" alt="time" />
+                                </div>
                             </div>
                             <div className="h-20">
                                 <p className='px-3 text-lg font-semibold text-center'>
@@ -264,7 +268,9 @@ const AboutUs = () => {
 
                         <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
                             <div className='p-5 text-center flex justify-center items-center'>
-                                <img className='h-12 w-12 p-3 rounded-full bg-dark-blue' src="/images/flight.png" alt="flight" />
+                                <div className="h-12 w-12">
+                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/flight.png" alt="flight" />
+                                </div>
                             </div>
                             <div className="h-20">
                                 <p className='px-3 text-lg font-semibold text-center'>
@@ -275,7 +281,9 @@ const AboutUs = () => {
 
                         <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
                             <div className='p-5 text-center flex justify-center items-center'>
-                                <img className='h-12 w-12 p-3 rounded-full bg-dark-blue' src="/images/place.png" alt="place" />
+                                <div className="h-12 w-12">
+                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/place.png" alt="place" />
+                                </div>
                             </div>
                             <div className="h-20">
                                 <p className='px-3 text-lg font-semibold text-center'>
@@ -286,7 +294,9 @@ const AboutUs = () => {
 
                         <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
                             <div className='p-5 text-center flex justify-center items-center'>
-                                <img className='h-12 w-12 p-3 rounded-full bg-dark-blue' src="/images/support_agent.png" alt="support_agent" />
+                                <div className="h-12 w-12">
+                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/support_agent.png" alt="support_agent" />
+                                </div>
                             </div>
                             <div className="h-20">
                                 <p className='px-3 text-lg font-semibold text-center'>

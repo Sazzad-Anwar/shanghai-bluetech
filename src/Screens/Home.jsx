@@ -152,20 +152,20 @@ const Home = () => {
                     <div className="container mx-auto">
                         <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">Already know what you are looking for?</h1>
                         <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
-                            <div className="item carousel-img w-full mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border rounded-2xl" src="/images/p-1.webp" alt="p-1" />
+                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
+                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-1.webp" alt="p-1" />
                             </div>
-                            <div className="item carousel-img w-full mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border rounded-2xl" src="/images/p-2.webp" alt="p-2" />
+                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
+                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-2.webp" alt="p-2" />
                             </div>
-                            <div className="item carousel-img w-full mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border rounded-2xl" src="/images/p-3.webp" alt="p-3" />
+                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
+                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-3.webp" alt="p-3" />
                             </div>
-                            <div className="item carousel-img w-full mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border rounded-2xl" src="/images/p-4.webp" alt="p-4" />
+                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
+                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-4.webp" alt="p-4" />
                             </div>
-                            <div className="item carousel-img w-full mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border rounded-2xl" src="/images/p-5.webp" alt="p-5" />
+                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
+                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-5.webp" alt="p-5" />
                             </div>
                         </OwlCarousel>
                     </div>
@@ -180,9 +180,9 @@ const Home = () => {
                         </div>
                         <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
                             {[6, 7, 8, 9, 10, 12].map((item, index) => (
-                                <div className="item w-full h-80 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
+                                <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
                                     <img
-                                        className="transform scale-100  h-72 group-hover:scale-110 transition duration-150 ease-in-out"
+                                        className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
                                         src={`/images/p-${item}.webp`} alt={`p-${item}`}
                                     />
 
@@ -259,11 +259,11 @@ const Home = () => {
                             <h1 className="text-xl lg:text-3xl text-gray-600 font-bold text-left">A Product For Every Occassion</h1>
                             <Link className="text-base lg:text-lg font-bold text-center" to='/products/water-filter-pitchers'>View all</Link>
                         </div>
-                        <OwlCarousel {...carousel3} className="owl-theme mt-7 w-full">
+                        <OwlCarousel {...carousel3} className="owl-theme mt-7 w-full productCarousel">
                             {[12, 13, 14, 15].map((item, index) => (
-                                <div className="item w-full h-80 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
+                                <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
                                     <img
-                                        className="transform scale-100 w- h-72 group-hover:scale-110 transition duration-150 ease-in-out"
+                                        className="transform scale-100 h-72 group-hover:scale-110 transition duration-150 ease-in-out"
                                         src={`/images/p-${item}.webp`} alt={`p-${item}`}
                                     />
 

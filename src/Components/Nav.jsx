@@ -70,7 +70,7 @@ const Nav = () => {
                             <i className="bi bi-plus-lg show-on-mobile"></i>
                         </a>
                         <div className="mega-menu expandable">
-                            <div className="content container mx-auto grid grid-cols-6 gap-2">
+                            <div className="content container mx-auto grid grid-cols-6 gap-2 items-center">
                                 <ul className="list-none mega-menu-list">
                                     <li onMouseOver={() => setCurrentNav('filter-pitcher')}>
                                         <Link to="/products/water-filter-pitchers" className="py-2 text-lg">Filter Pitchers</Link>
@@ -209,7 +209,7 @@ const Nav = () => {
                                     <>
                                         {
                                             [6, 7, 8,].map((item, index) => (
-                                                <div key={item} style={{ widht: '312px', height: '500px' }} className="item carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center  relative group">
+                                                <div key={item} className="item carousel-img border h-82 w-63 rounded-2xl overflow-hidden mx-auto flex flex-col justify-center items-center  relative group">
                                                     <img
                                                         className="transform scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
                                                         src={`/images/p-${item}.webp`} alt={`p-${item}`}

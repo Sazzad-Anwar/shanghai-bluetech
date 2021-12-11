@@ -29,8 +29,11 @@ module.exports = {
     extend: {
       spacing: {
         "800": "50rem",
-        "500": "31.2"
+        "82": "21.875rem"
       },
+      width: {
+        "63": "15.625rem"
+      }
     },
   },
   variants: {
