@@ -3,15 +3,47 @@ import OwlCarousel from 'react-owl-carousel';
 import { Link } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { useEffect, useState } from 'react';
+import { getBulletCard, getMarketingImage, getSliders, getTestimonials } from '../Api';
+import Loader from '../Components/Loader';
 const { TabPane } = Tabs;
 
 const Home = () => {
 
     const [isMobile, setIsMobile] = useState(false);
+    const [sliders, setSliders] = useState([]);
+    const [marketingImages, setMarketingImages] = useState([]);
+    const [bulletCards, setBulletCards] = useState([]);
+    const [testimonials, setTestimonials] = useState([]);
 
     useEffect(() => {
         document.title = 'Bluetech | Home'
+
+        let getSliderData = async () => {
+            const { data } = await getSliders('home-page');
+            const { data: images } = await getMarketingImage();
+            const { data: cards } = await getBulletCard();
+            const { data: testimonialData } = await getTestimonials();
+            setTestimonials(testimonialData);
+            setBulletCards(cards);
+            setMarketingImages(images)
+            setSliders(data[0]?.attributes?.images?.data);
+        }
+
+        getSliderData();
+
+        if (window.innerWidth < 992) {
+            setIsMobile(true);
+        }
+
+        document.addEventListener('resize', () => {
+            if (window.innerWidth < 992) {
+                setIsMobile(true);
+            }
+        })
+
     }, [])
+
+    console.log(testimonials)
 
     let carousel1 = {
         items: 1,
@@ -21,8 +53,8 @@ const Home = () => {
         autoplayTimeout: 3000,
         autoplayHoverPause: false,
         dots: false,
-        animateOut: 'animate__backOutLeft',
-        animateIn: 'animate__fadeInRight',
+        animateOut: 'animate__fadeOut',
+        animateIn: 'animate__fadeIn',
     }
 
     let carousel2 = {
@@ -86,63 +118,63 @@ const Home = () => {
         }
     }
 
-    useEffect(() => {
-
-        if (window.innerWidth < 992) {
-            setIsMobile(true);
-        }
-
-        document.addEventListener('resize', () => {
-            if (window.innerWidth < 992) {
-                setIsMobile(true);
-            }
-        })
-    }, [])
-
     return (
         <Layout>
             <main>
                 <section className="relative">
-                    <OwlCarousel className='owl-theme' {...carousel1}>
-                        <div className='item'>
-                            <img src="/images/banner-1.png" alt="banner-1" className="h-screen w-auto" width="100%" />
-                        </div>
-                        <div className='item'>
-                            <img src="/images/banner-2.png" alt="banner-2" className="h-screen w-auto" width="100%" />
-                        </div>
-                        <div className='item'>
-                            <img src="/images/banner-3.png" alt="banner-3" className="h-screen w-auto" width="100%" />
-                        </div>
-                    </OwlCarousel>
+                    {sliders && sliders.length ?
+                        <OwlCarousel className='owl-theme' {...carousel1}>
+                            {sliders.map((slider) => (
+                                <div key={slider.attributes.formats.large.url} className='item'>
+                                    <img src={slider.attributes.formats.large.url} alt={slider.attributes.alternativeText} className="h-screen w-auto" width="100%" />
+                                </div>
+                            ))}
+                        </OwlCarousel>
+                        : <div className='h-screen w-auto flex justify-center items-center bg-gray-300 animate-pulse'>
+                            <Loader />
+                        </div>}
 
-                    <div class="custom-shape-divider-bottom-1638813914 z-10">
+                    <div className="custom-shape-divider-bottom-1638813914 z-10">
                         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
                         </svg>
                     </div>
 
                     <div className="absolute inset-0 z-10 lg:block hidden">
                         <div className="flex justify-center items-end lg:ml-40 lg:mr-40 xl:ml-80 xl:mr-80 w-full lg:w-auto h-full">
-                            <OwlCarousel {...carousel2} className="owl-theme">
-                                <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
-                                    <div>
-                                        <img className="h-20" src="/images/filter_icon.svg" alt="filter-icon" />
+                            {bulletCards && bulletCards.length ?
+                                <OwlCarousel {...carousel2} className="owl-theme">
+                                    {bulletCards.map(card => (
+                                        <div key={card.attributes.icon.data.attributes.url} className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
+                                            <div>
+                                                <img className="h-20" src={card.attributes.icon.data.attributes.url} alt={card.attributes.icon.data.attributes.alternativeText} />
+                                            </div>
+                                            <h1 className="text-lg font-bold text-center text-white uppercase">{card.attributes.title}</h1>
+                                        </div>
+                                    ))}
+
+                                </OwlCarousel>
+                                : <OwlCarousel {...carousel2} className="owl-theme">
+                                    <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row items-center transform scale-100 hover:scale-105 transition duration-200 h-40 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
+                                        <div className="h-16 w-16 mr-3 rounded-full bg-secondary animate-pulse">
+                                            <span />
+                                        </div>
+                                        <h1 className="text-lg font-bold text-center text-secondary uppercase h-6 w-auto bg-secondary animate-pulse">Lorem ipsum dolor.</h1>
                                     </div>
-                                    <h1 className="text-lg font-bold text-center text-white uppercase">Replacement filter cartridges </h1>
-                                </div>
-                                <div className="bg-primary  mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown animate__delay-1s wow">
-                                    <div>
-                                        <img className="h-20" src="/images/setup_brita_icon.svg" alt="filter-icon" />
+                                    <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row items-center transform scale-100 hover:scale-105 transition duration-200 h-40 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
+                                        <div className="h-16 w-16 mr-3 rounded-full bg-secondary animate-pulse">
+                                            <span />
+                                        </div>
+                                        <h1 className="text-lg font-bold text-center text-secondary uppercase h-6 w-auto bg-secondary animate-pulse">Lorem ipsum dolor.</h1>
                                     </div>
-                                    <h1 className="text-lg font-bold text-center text-white uppercase">Water filter pitchers </h1>
-                                </div>
-                                <div className="bg-primary  mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row justify-between items-center transform scale-100 hover:scale-105 transition duration-200 ease-in-out mb-3 animate__animated animate__fadeInDown animate__delay-2s wow">
-                                    <div>
-                                        <img className="h-20" src="/images/compare_icon.svg" alt="filter-icon" />
+                                    <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row items-center transform scale-100 hover:scale-105 transition duration-200 h-40 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
+                                        <div className="h-16 w-16 mr-3 rounded-full bg-secondary animate-pulse">
+                                            <span />
+                                        </div>
+                                        <h1 className="text-lg font-bold text-center text-secondary uppercase h-6 w-auto bg-secondary animate-pulse">Lorem ipsum dolor.</h1>
                                     </div>
-                                    <h1 className="text-lg font-bold text-center text-white uppercase">Other Bluetech products</h1>
-                                </div>
-                            </OwlCarousel>
+                                </OwlCarousel>}
+
                         </div>
                     </div>
                 </section>
@@ -151,23 +183,22 @@ const Home = () => {
                 <section className="my-20">
                     <div className="container mx-auto">
                         <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">Already know what you are looking for?</h1>
-                        <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
-                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-1.webp" alt="p-1" />
-                            </div>
-                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-2.webp" alt="p-2" />
-                            </div>
-                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-3.webp" alt="p-3" />
-                            </div>
-                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-4.webp" alt="p-4" />
-                            </div>
-                            <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                <img className="shadow-lg border h-80 rounded-2xl" src="/images/p-5.webp" alt="p-5" />
-                            </div>
-                        </OwlCarousel>
+                        {marketingImages && marketingImages.length ?
+                            <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
+                                {marketingImages.map(marketingImage => (
+                                    <div key={marketingImage.attributes.image.data.attributes.url} className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
+                                        <img className="shadow-lg border h-80 rounded-2xl" src={marketingImage.attributes.image.data.attributes.url} alt={marketingImage.attributes.image.data.attributes.alternativeText} />
+                                    </div>
+                                ))}
+                            </OwlCarousel>
+                            : <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
+                                <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
+                                    <div className="shadow-lg border h-80 rounded-2xl bg-gray-300 animate-pulse flex justify-center items-center">
+                                        <Loader />
+                                    </div>
+                                </div>
+                            </OwlCarousel>
+                        }
                     </div>
                 </section>
 
@@ -180,7 +211,7 @@ const Home = () => {
                         </div>
                         <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
                             {[6, 7, 8, 9, 10, 12].map((item, index) => (
-                                <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
+                                <div key={index} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
                                     <img
                                         className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
                                         src={`/images/p-${item}.webp`} alt={`p-${item}`}
@@ -206,48 +237,23 @@ const Home = () => {
                     <div className="container mx-auto">
                         <h1 className="text-xl lg:text-3xl text-gray-600 font-bold text-center">Testimonials</h1>
                         <div className="my-6 sm:mx-6 md:mx-12 lg:22 xl:mx-44 lg:my-20">
-                            <Tabs size='large' tabPosition={isMobile ? 'top' : 'left'} className="shadow-lg border rounded-lg p-2 lg:px-6 lg:py-20">
-                                <TabPane tab="Massive Production" className="text-center" key="1">
-                                    <div className="py-4">
-                                        <h1 className="text-xl lg:text-2xl font-bold">Big Production Capacity</h1>
-                                        <p className="text-lg pt-4 px-2 lg:px-10">
-                                            Shanghai Bluetech has one of the highest production capacities in the world in the industry of water filter
-                                            pitchers. Worlds most advance testing equipment paired with the massive production facility produces the best
-                                            products with lowest possible time with uncompromised production quality.
-                                        </p>
-                                    </div>
-                                </TabPane>
-                                <TabPane tab="Best Customer Support" className="text-center" key="2">
-                                    <div className="py-4">
-                                        <h1 className="text-xl lg:text-2xl font-bold">Fantastic After Sales Support</h1>
-                                        <p className="text-lg pt-4 px-2 lg:px-10">
-                                            Sales support is one the things that other companies forget to give emphasis on.
-                                            But Shanghai Bluetech is different in this regard. After sales support team will
-                                            work very hard to ensure customer satisfaction all the way.
-                                        </p>
-                                    </div>
-                                </TabPane>
-                                <TabPane tab="Fastest Supply Chain" className="text-center" key="3">
-                                    <div className="py-4">
-                                        <h1 className="text-xl lg:text-2xl font-bold">ON-TIME SHIPPING</h1>
-                                        <p className="text-lg pt-4 px-2 lg:px-10">
-                                            Because our factory is located in Shanghai. Our shipment times are faster than most other companies based
-                                            in China. On-Time shipping is our first priority to maintain customer satisfaction. No Production delay,
-                                            Always get the best quality production on time with Bluetech.
-                                        </p>
-                                    </div>
-                                </TabPane>
-                                <TabPane tab="Completely Customizable" className="text-center" key="4">
-                                    <div className="py-4">
-                                        <h1 className="text-xl lg:text-2xl font-bold">OEM and ODM, Completely Customizable.</h1>
-                                        <p className="text-lg pt-4 px-2 lg:px-10">
-                                            Bluetech has a dedicated team of designers and engineers tasked to meet customer demands during
-                                            Production period. You can completely design your own customer product and we will deliver the
-                                            best possible production quality with Our expertise and experience.
-                                        </p>
-                                    </div>
-                                </TabPane>
-                            </Tabs>
+                            {testimonials && testimonials.length ?
+                                <Tabs size='large' tabPosition={isMobile ? 'top' : 'left'} className="shadow-lg border rounded-lg p-2 lg:px-6 lg:py-20">
+                                    {testimonials.map(testimonial => (
+                                        <TabPane tab={testimonial.attributes.name} className="text-center" key={testimonial.attributes.name}>
+                                            <div className="py-4">
+                                                <h1 className="text-xl lg:text-2xl font-bold">{testimonial.attributes.title}</h1>
+                                                <p className="text-lg pt-4 px-2 lg:px-10">
+                                                    {testimonial.attributes.description}
+                                                </p>
+                                            </div>
+                                        </TabPane>
+                                    ))}
+                                </Tabs>
+                                : <div className='h-96 flex justify-center items-center w-full bg-gray-300 animate-pulse border rounded-lg text-center'>
+                                    <Loader />
+                                </div>
+                            }
                         </div>
                     </div>
                 </section>
@@ -282,7 +288,7 @@ const Home = () => {
                     </div>
                 </section>
             </main>
-        </Layout>
+        </Layout >
     );
 };
 

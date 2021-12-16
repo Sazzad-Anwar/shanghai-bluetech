@@ -33,6 +33,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* navbar style */
 /* header */
 .header {

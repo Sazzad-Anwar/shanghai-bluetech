@@ -158,7 +158,7 @@ const Layout = ({ children, className }) => {
                             className="bg-white text-primary ml-5 px-3 py-2 cursor-pointer rounded-full"
                             onClick={goTop}
                         >
-                            <i class="bi bi-chevron-up"></i>
+                            <i className="bi bi-chevron-up"></i>
                         </span>
                     </Tooltip>
                 </div>
