@@ -31,7 +31,7 @@ export const getBulletCard = async () => {
 // api to get testimonials
 export const getTestimonials = async () => {
     try {
-        const { data } = await axios.get(`/testimonials?populate=*`);
+        const { data } = await axios.get(`${URL}/testimonials?populate=*`);
         return data;
     } catch (error) {
         return error.message
