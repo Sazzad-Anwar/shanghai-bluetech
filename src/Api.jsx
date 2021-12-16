@@ -1,9 +1,10 @@
 import axios from 'axios';
+let URL = 'https://shbluetech-api.herokuapp.com/api'
 
 // api to get the sliders of homepage
 export const getSliders = async (pageName) => {
     try {
-        const { data } = await axios.get(`/banners?filters[pageName][$eq]=${pageName}&&populate=*`);
+        const { data } = await axios.get(`${URL}/banners?filters[pageName][$eq]=${pageName}&&populate=*`);
         return data;
     } catch (error) {
         return error.message
@@ -12,7 +13,7 @@ export const getSliders = async (pageName) => {
 // api to get marketing images
 export const getMarketingImage = async () => {
     try {
-        const { data } = await axios.get(`/marketing-images?populate=*`);
+        const { data } = await axios.get(`${URL}/marketing-images?populate=*`);
         return data;
     } catch (error) {
         return error.message
@@ -21,7 +22,7 @@ export const getMarketingImage = async () => {
 // api to get bullet cards
 export const getBulletCard = async () => {
     try {
-        const { data } = await axios.get(`/bullet-cards?populate=*`);
+        const { data } = await axios.get(`${URL}/bullet-cards?populate=*`);
         return data;
     } catch (error) {
         return error.message
