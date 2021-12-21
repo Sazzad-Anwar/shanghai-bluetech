@@ -1,13 +1,51 @@
 import { Input, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
-import { CopyrightOutlined } from '@ant-design/icons'
+import { CopyrightOutlined, LoadingOutlined } from '@ant-design/icons'
+import { useEffect, useState } from 'react';
+import { getCategories, getCompanyAddress, sendMsg } from '../Api';
 const { TextArea } = Input;
 
 const Layout = ({ children, className }) => {
+    const [categories, setCategories] = useState([]);
+    const [companyAddress, setCompanyAddress] = useState({})
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [isDisabled, setIsDisabled] = useState(false);
 
     let goTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    useEffect(() => {
+        const getAPIdata = async () => {
+            const { data: categoriesData } = await getCategories();
+            const { data: address } = await getCompanyAddress();
+            setCompanyAddress(address[0].attributes)
+            setCategories(categoriesData);
+        }
+
+        getAPIdata();
+    }, [])
+
+    const sendMessage = (e) => {
+        e.preventDefault();
+        const data = {
+            name,
+            email,
+            query: message
+        }
+        setIsDisabled(true);
+        if (name && email && message) {
+            sendMsg(data).then(() => {
+                setName('');
+                setEmail('');
+                setMessage("");
+                setIsDisabled(false);
+            })
+        }
+
     }
 
     return (
@@ -24,12 +62,12 @@ const Layout = ({ children, className }) => {
                 <div className="container mx-auto">
                     <h1 className="text-xl lg:text-3xl font-bold text-center text-white animate__animated animate__fadeInDown wow">Send Message To Supplier</h1>
                     <div className="flex justify-center items-center mb-10 animate__animated animate__fadeInDown wow animate__delay-1s">
-                        <form className="bg-white my-6 lg:my-20 p-4 lg:p-8 shadow-xl border rounded-xl">
-                            <Input className="my-3 py-3" placeholder="Name" />
-                            <Input className="my-3 py-3" placeholder="Email" />
-                            <TextArea className="my-3 py-3" placeholder="Please inform us about your question" autoSize />
-                            <button type="submit" className="my-3 py-2 px-3 text-base text-white bg-primary hover:bg-blue-400 outline-none shadow transition duration-300 ease-in-out">
-                                Send <i className="bi bi-send-fill pl-2"></i>
+                        <form onSubmit={sendMessage} className="bg-white my-6 lg:my-20 p-4 lg:p-8 shadow-xl border rounded-xl">
+                            <Input value={name} onChange={e => setName(e.target.value)} type='text' className="my-3 py-3" placeholder="Name" />
+                            <Input value={email} onChange={e => setEmail(e.target.value)} type="email" className="my-3 py-3" placeholder="Email" />
+                            <TextArea value={message} onChange={e => setMessage(e.target.value)} className="my-3 py-3" placeholder="Please inform us about your question" autoSize />
+                            <button disabled={isDisabled} type="submit" className="my-3 py-2 px-3 text-base text-white bg-primary hover:bg-blue-400 outline-none shadow transition duration-300 ease-in-out">
+                                {isDisabled ? <> <LoadingOutlined /> Sending...</> : <>Send <i className="bi bi-send-fill pl-2"></i></>}
                             </button>
                         </form>
                     </div>
@@ -49,8 +87,7 @@ const Layout = ({ children, className }) => {
                         <div>
                             <img src="/images/logo-white.png" alt="logo" />
                             <p className="text-base text-white mt-5 lg:pr-10">
-                                Shanghai Bluetech is a a manufacturer of world class water filter products.
-                                Follow us on social media to know and get updates about Bluetech.
+                                {companyAddress.shortDescription}
                             </p>
                             <div className="flex items-center py-3">
                                 <a href="https://facebook.com" target="_blank" rel="noreferrer">
@@ -91,37 +128,11 @@ const Layout = ({ children, className }) => {
                         <div>
                             <h1 className="text-white text-2xl font-semibold bottom-underline">Categories</h1>
                             <ul className="list-none mt-8" style={{ columnCount: 2 }}>
-                                <li className="py-2.5 clear-both">
-                                    <Link to="/products/water-filter-pitchers" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Filter Pitchers</Link>
-                                </li>
-                                <li className="py-2.5">
-                                    <Link to="/products/filter-cartridges" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Filter Cartridges</Link>
-                                </li>
-                                <li className="py-2.5">
-                                    <Link to="/products/glass-pitchers" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Glass Pitchers</Link>
-                                </li>
-                                <li className="py-2.5">
-                                    <Link to="/products/rv-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">RV Filters</Link>
-                                </li>
-                                <li className="py-2.5">
-                                    <Link to="/products/refrigerator-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Refrigerator Filters</Link>
-                                </li>
-                                <li className="py-2.5">
-                                    <Link to="/products/coffee-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Coffe Filters</Link>
-                                </li>
-                                <li className="py-2.5">
-                                    <Link to="/products/bottle-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Bottle Filters</Link>
-                                </li>
-                                <li className="py-2.5">
-                                    <Link to="/products/soda-machines" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Soda Machines</Link>
-                                </li>
-                                <li className="py-2.5">
-                                    <Link to="/products/faucet-mounted-filters" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Faucet Mounted Filters</Link>
-                                </li>
-                                <li className="py-2.5">
-                                    <Link to="/products/water-dispencers" className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">Water Dispencers</Link>
-                                </li>
-
+                                {categories && categories.map((category) => (
+                                    <li key={category.id} className="py-2.5 clear-both">
+                                        <Link to={`/category/${(category.attributes.name.toLowerCase()).split(' ').join('-')}`} className="text-white text-base footer-link transition duration-200 ease-in-out hover:text-white">{category.attributes.name}</Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
@@ -131,20 +142,19 @@ const Layout = ({ children, className }) => {
                                 <li className="py-2.5 flex items-center">
                                     <i className="bi bi-geo-alt-fill text-white text-xl px-3 py-2 bg-primary rounded-full"></i>
                                     <span className="ml-2 text-base text-white">
-                                        333 Huasong Street <br />
-                                        Xidu, Fengxian, Shanghai, China.
+                                        {companyAddress.street}
                                     </span>
                                 </li>
                                 <li className="py-2.5 flex items-center">
                                     <i className="bi bi-telephone-fill text-white text-xl px-3 py-2 bg-primary rounded-full"></i>
-                                    <a href="tel:+8615005826317" className="ml-2 text-base hover:text-white text-white">
-                                        +8615005826317
+                                    <a href={`tel:${companyAddress.phone}`} className="ml-2 text-base hover:text-white text-white">
+                                        {companyAddress.phone}
                                     </a>
                                 </li>
                                 <li className="py-2.5 flex items-center">
                                     <i className="bi bi-envelope-fill text-white text-xl px-3 py-2 bg-primary rounded-full"></i>
-                                    <a href="mailto:info@cn-bluetech.com" className="ml-2 hover:text-white text-base text-white">
-                                        info@cn-bluetech.com
+                                    <a href={`mailto:${companyAddress.email}`} className="ml-2 hover:text-white text-base text-white">
+                                        {companyAddress.email}
                                     </a>
                                 </li>
                             </ul>

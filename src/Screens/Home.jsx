@@ -3,7 +3,7 @@ import OwlCarousel from 'react-owl-carousel';
 import { Link } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { useEffect, useState } from 'react';
-import { getBulletCard, getMarketingImage, getSliders, getTestimonials } from '../Api';
+import { getBulletCard, getHomePageSections, getLatestFilters, getMarketingImage, getNewModelProducts, getSliders, getTestimonials } from '../Api';
 import Loader from '../Components/Loader';
 const { TabPane } = Tabs;
 
@@ -14,6 +14,9 @@ const Home = () => {
     const [marketingImages, setMarketingImages] = useState([]);
     const [bulletCards, setBulletCards] = useState([]);
     const [testimonials, setTestimonials] = useState([]);
+    const [sections, setSections] = useState([]);
+    const [latestFilters, setLatestFilters] = useState([]);
+    const [newModelProducts, setNewModelProducts] = useState([]);
 
     useEffect(() => {
         document.title = 'Bluetech | Home'
@@ -23,6 +26,13 @@ const Home = () => {
             const { data: images } = await getMarketingImage();
             const { data: cards } = await getBulletCard();
             const { data: testimonialData } = await getTestimonials();
+            const { data: sectionsData } = await getHomePageSections();
+            const { data: filtersData } = await getLatestFilters();
+            const { data: newModels } = await getNewModelProducts();
+
+            setNewModelProducts(newModels);
+            setLatestFilters(filtersData[0].attributes.products.data);
+            setSections(sectionsData.attributes.sections.sort());
             setTestimonials(testimonialData);
             setBulletCards(cards);
             setMarketingImages(images)
@@ -41,9 +51,7 @@ const Home = () => {
             }
         })
 
-    }, [])
-
-    console.log(testimonials)
+    }, []);
 
     let carousel1 = {
         items: 1,
@@ -182,9 +190,22 @@ const Home = () => {
                 {/* all products section */}
                 <section className="my-20">
                     <div className="container mx-auto">
-                        <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">Already know what you are looking for?</h1>
+                        {sections && sections.filter(section => section.index === 1)[0]?.title ?
+                            <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">
+                                {sections && sections.filter(section => section.index === 1)[0]?.title}
+                            </h1> :
+                            <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center"></div>
+                        }
+
+                        {sections && sections.filter(section => section.index === 1)[0]?.description ?
+                            <p className='text-base lg:w-2/3 lg:mx-auto text-gray-600 lg:text-lg font-semibold text-center mt-3'>
+                                {sections && sections.filter(section => section.index === 1)[0]?.description}
+                            </p> :
+                            <div className="h-4 lg:w-2/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-center mt-3"></div>
+                        }
+
                         {marketingImages && marketingImages.length ?
-                            <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
+                            <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full animate__animated animate__fadeIn wow">
                                 {marketingImages.map(marketingImage => (
                                     <div key={marketingImage.attributes.image.data.attributes.url} className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
                                         <img className="shadow-lg border h-80 rounded-2xl" src={marketingImage.attributes.image.data.attributes.url} alt={marketingImage.attributes.image.data.attributes.alternativeText} />
@@ -206,37 +227,74 @@ const Home = () => {
                 <section className="my-20 bg-light-blue py-20">
                     <div className="container mx-auto">
                         <div className="flex justify-between items-center">
-                            <h1 className="text-xl lg:text-3xl text-gray-600 font-bold text-left">Checkout Our latest filters</h1>
-                            <Link className="text-base lg:text-lg font-bold text-center" to='/products/water-filter-pitchers'>View all</Link>
+                            <div>
+                                {sections && sections.filter(section => section.index === 2)[0]?.title ?
+                                    <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-left">
+                                        {sections && sections.filter(section => section.index === 2)[0]?.title}
+                                    </h1> :
+                                    <div className="h-6 lg:w-1/3 lg:ml-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-left"></div>
+                                }
+
+                                {sections && sections.filter(section => section.index === 2)[0]?.description ?
+                                    <p className='text-base lg:w-2/3 lg:mr-auto text-gray-600 lg:text-lg font-semibold text-left mt-3'>
+                                        {sections && sections.filter(section => section.index === 2)[0]?.description}
+                                    </p> :
+                                    <div className="h-4 lg:w-2/3 lg:mr-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-left mt-3"></div>
+                                }
+                            </div>
+                            <Link className="text-base lg:text-lg font-bold text-center w-24" to='/products/filter-cartridges'>View all</Link>
                         </div>
-                        <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
-                            {[6, 7, 8, 9, 10, 12].map((item, index) => (
-                                <div key={index} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
-                                    <img
-                                        className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
-                                        src={`/images/p-${item}.webp`} alt={`p-${item}`}
-                                    />
 
-                                    <h1 className="flex absolute bottom-0 py-3 text-white w-full bg-primary text-xl justify-center items-center">
-                                        Filter {item}
-                                    </h1>
+                        {latestFilters && latestFilters.length ? <>
+                            <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
+                                {latestFilters.map((item) => (
+                                    <div key={item.id} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow">
+                                        <img
+                                            className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
+                                            src={item.attributes.images.data[0].attributes.url} alt={item.attributes.name}
+                                        />
 
-                                    <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                        <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                            <i className="bi bi-eye-fill text-xl px-3"></i>
-                                        </Link>
+                                        <h1 className="flex absolute bottom-0 py-3 text-white w-full bg-primary text-xl justify-center items-center">
+                                            {item.attributes.name}
+                                        </h1>
+
+                                        <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
+                                            <Link to={`/products/${item.id}`} className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                                <i className="bi bi-eye-fill text-xl px-3"></i>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))}
+                            </OwlCarousel>
+                        </> :
+                            <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
+                                <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
+                                    <div className="shadow-lg border h-80 rounded-2xl bg-gray-300 animate-pulse flex justify-center items-center">
+                                        <Loader />
                                     </div>
                                 </div>
-                            ))}
-                        </OwlCarousel>
+                            </OwlCarousel>
+                        }
                     </div>
                 </section>
 
                 {/* testimonial section */}
                 <section className="my-20">
                     <div className="container mx-auto">
-                        <h1 className="text-xl lg:text-3xl text-gray-600 font-bold text-center">Testimonials</h1>
-                        <div className="my-6 sm:mx-6 md:mx-12 lg:22 xl:mx-44 lg:my-20">
+                        {sections && sections.filter(section => section.index === 3)[0]?.title ?
+                            <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">
+                                {sections && sections.filter(section => section.index === 3)[0]?.title}
+                            </h1> :
+                            <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center"></div>
+                        }
+
+                        {sections && sections.filter(section => section.index === 3)[0]?.description ?
+                            <p className='text-base lg:w-2/3 lg:mx-auto text-gray-600 lg:text-lg font-semibold text-center mt-3'>
+                                {sections && sections.filter(section => section.index === 3)[0]?.description}
+                            </p> :
+                            <div className="h-4 lg:w-2/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-center mt-3"></div>
+                        }
+                        <div className="my-6 sm:mx-6 md:mx-12 lg:22 xl:mx-44 lg:my-10">
                             {testimonials && testimonials.length ?
                                 <Tabs size='large' tabPosition={isMobile ? 'top' : 'left'} className="shadow-lg border rounded-lg p-2 lg:px-6 lg:py-20">
                                     {testimonials.map(testimonial => (
@@ -259,32 +317,57 @@ const Home = () => {
                 </section>
 
                 {/* a product for every occation */}
-                <section className="mt-20 bg-light-blue py-20">
+                <section className="my-20 bg-light-blue py-20">
                     <div className="container mx-auto">
-                        <div className="flex flex-col lg:flex-row justify-between items-center">
-                            <h1 className="text-xl lg:text-3xl text-gray-600 font-bold text-left">A Product For Every Occassion</h1>
-                            <Link className="text-base lg:text-lg font-bold text-center" to='/products/water-filter-pitchers'>View all</Link>
+                        <div className="flex justify-between items-center">
+                            <div>
+                                {sections && sections.filter(section => section.index === 4)[0]?.title ?
+                                    <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-left">
+                                        {sections && sections.filter(section => section.index === 4)[0]?.title}
+                                    </h1> :
+                                    <div className="h-6 lg:w-1/3 lg:ml-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-left"></div>
+                                }
+
+                                {sections && sections.filter(section => section.index === 4)[0]?.description ?
+                                    <p className='text-base lg:w-2/3 lg:mr-auto text-gray-600 lg:text-lg font-semibold text-left mt-3'>
+                                        {sections && sections.filter(section => section.index === 4)[0]?.description}
+                                    </p> :
+                                    <div className="h-4 lg:w-2/3 lg:mr-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-left mt-3"></div>
+                                }
+                            </div>
+                            <Link className="text-base lg:text-lg font-bold text-center w-24" to='/products/new-models'>View all</Link>
                         </div>
-                        <OwlCarousel {...carousel3} className="owl-theme mt-7 w-full productCarousel">
-                            {[12, 13, 14, 15].map((item, index) => (
-                                <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeInDown wow animate__delay-1s">
-                                    <img
-                                        className="transform scale-100 h-72 group-hover:scale-110 transition duration-150 ease-in-out"
-                                        src={`/images/p-${item}.webp`} alt={`p-${item}`}
-                                    />
 
-                                    <h1 className="flex absolute bottom-0 py-3 text-white w-full bg-primary text-xl justify-center items-center">
-                                        Filter {item}
-                                    </h1>
+                        {newModelProducts && newModelProducts.length ? <>
+                            <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
+                                {newModelProducts.map((item) => (
+                                    <div key={item.id} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow">
+                                        <img
+                                            className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
+                                            src={item.attributes.images.data[0].attributes.url} alt={item.attributes.name}
+                                        />
 
-                                    <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                        <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                            <i className="bi bi-eye-fill text-xl px-3"></i>
-                                        </Link>
+                                        <h1 className="flex absolute bottom-0 py-3 text-white w-full bg-primary text-xl justify-center items-center">
+                                            {item.attributes.name}
+                                        </h1>
+
+                                        <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
+                                            <Link to={`/products/${item.id}`} className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                                <i className="bi bi-eye-fill text-xl px-3"></i>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))}
+                            </OwlCarousel>
+                        </> :
+                            <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
+                                <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
+                                    <div className="shadow-lg border h-80 rounded-2xl bg-gray-300 animate-pulse flex justify-center items-center">
+                                        <Loader />
                                     </div>
                                 </div>
-                            ))}
-                        </OwlCarousel>
+                            </OwlCarousel>
+                        }
                     </div>
                 </section>
             </main>

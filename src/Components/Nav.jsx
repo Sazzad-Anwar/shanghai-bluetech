@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getCategories } from '../Api';
 
 const Nav = () => {
 
     const [currentNav, setCurrentNav] = useState('filter-pitcher');
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         const menuBtn = document.querySelector('.menu-btn');
@@ -28,6 +30,14 @@ const Nav = () => {
                 }
             });
         });
+
+        const getAPIdata = async () => {
+            const { data: categoriesData } = await getCategories();
+            setCurrentNav((categoriesData[0].attributes.name.toLowerCase()).split(' ').join('-'))
+            setCategories(categoriesData);
+        }
+
+        getAPIdata();
 
         window.addEventListener('scroll', () => {
             let scrollPos = window.scrollY;
@@ -72,180 +82,41 @@ const Nav = () => {
                         <div className="mega-menu expandable">
                             <div className="content container mx-auto grid grid-cols-6 gap-2 items-center">
                                 <ul className="list-none mega-menu-list">
-                                    <li onMouseOver={() => setCurrentNav('filter-pitcher')}>
-                                        <Link to="/products/water-filter-pitchers" className="py-2 text-lg">Filter Pitchers</Link>
-                                    </li>
-                                    <li onMouseOver={() => setCurrentNav('filter-cartridges')}>
-                                        <Link to="/products/filter-cartridges" className="py-2 text-lg">Filter Cartridges</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/products/glass-pitchers" className="py-2 text-lg">Glass Pitchers</Link>
-                                    </li>
-                                    <li onMouseOver={() => setCurrentNav('rv-filters')}>
-                                        <Link to="/products/rv-filters" className="py-2 text-lg">RV Filters</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/products/refrigerator-filters" className="py-2 text-lg">Refrigerator Filters</Link>
-                                    </li>
-                                    <li onMouseOver={() => setCurrentNav('coffee-filters')}>
-                                        <Link to="/products/coffee-filters" className="py-2 text-lg">Coffe Filters</Link>
-                                    </li>
-                                    <li onMouseOver={() => setCurrentNav('bottle-filters')}>
-                                        <Link to="/products/bottle-filters" className="py-2 text-lg">Bottle Filters</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/products/soda-machines" className="py-2 text-lg">Soda Machines</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/products/faucet-mounted-filters" className="py-2 text-lg">Faucet Mounted Filters</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/products/water-dispencers" className="py-2 text-lg">Water Dispencers</Link>
-                                    </li>
+                                    {categories && categories.map((category) => (
+                                        <li key={category.id} onMouseOver={() => setCurrentNav((category.attributes.name.toLowerCase()).split(' ').join('-'))}>
+                                            <Link to={`/category/${(category.attributes.name.toLowerCase()).split(' ').join('-')}`} className="py-2 text-lg">{category.attributes.name}</Link>
+                                        </li>
+                                    ))}
                                 </ul>
-                                {currentNav === 'filter-pitcher' && (
-                                    <>
-                                        <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group ">
-                                            <img
-                                                className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
-                                                src="/products/Violet-529.webp" alt="Violet-529.webp"
-                                            />
+                                {categories && categories.map(category => {
+                                    if (currentNav === (category.attributes.name.toLowerCase()).split(' ').join('-')) {
+                                        return (
+                                            <>
+                                                {category.attributes.products.data.slice(0, 4).map(product => (
+                                                    <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group ">
+                                                        <img
+                                                            className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
+                                                            src={product.attributes.images.data[0].attributes.url} alt={product.attributes.images.data[0].attributes.alternativeText}
+                                                        />
 
-                                            <h1 className="flex absolute bottom-0 py-3 text-white w-full bg-primary text-xl justify-center items-center">
-                                                Violet-529
-                                            </h1>
+                                                        <h1 className="flex absolute bottom-0 py-3 text-white w-full bg-primary text-xl justify-center items-center">
+                                                            {product.attributes.name}
+                                                        </h1>
 
-                                            <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                                <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                                    <i className="bi bi-eye-fill text-xl px-3"></i>
-                                                </Link>
-                                            </div>
-                                        </div>
-
-                                        <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group ">
-                                            <img
-                                                className="transform h-80 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                                src="/products/Orchid-530.webp" alt="Orchid-530.webp"
-                                            />
-
-                                            <h1 className="flex absolute bottom-0 py-3 w-full text-white bg-primary text-xl justify-center items-center">
-                                                Orchid-530
-                                            </h1>
-
-                                            <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                                <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                                    <i className="bi bi-eye-fill text-xl px-3"></i>
-                                                </Link>
-                                            </div>
-                                        </div>
-
-                                        <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group ">
-                                            <img
-                                                className="transform h-80 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                                src="/products/Tulip-528.webp" alt="Tulip -528.webp"
-                                            />
-
-                                            <h1 className="flex absolute bottom-0 py-3 w-full text-white bg-primary text-xl justify-center items-center">
-                                                Tulip-528
-                                            </h1>
-
-                                            <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                                <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                                    <i className="bi bi-eye-fill text-xl px-3"></i>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-
-                                {currentNav === 'rv-filters' && (
-                                    <>
-                                        <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group ">
-                                            <img
-                                                className="transform h-80 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                                src="/images/new-product-1.png" alt="Tulip -528.webp"
-                                            />
-
-                                            <h1 className="flex absolute bottom-0 py-3 w-full text-white bg-primary text-xl justify-center items-center">
-                                                RV Filters
-                                            </h1>
-
-                                            <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                                <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                                    <i className="bi bi-eye-fill text-xl px-3"></i>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-
-                                {currentNav === 'coffee-filters' && (
-                                    <>
-                                        <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group ">
-                                            <img
-                                                className="transform h-80 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                                src="/images/new-product-3.png" alt="Tulip -528.webp"
-                                            />
-
-                                            <h1 className="flex absolute bottom-0 py-3 w-full text-white bg-primary text-xl justify-center items-center">
-                                                Coffee Filters
-                                            </h1>
-
-                                            <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                                <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                                    <i className="bi bi-eye-fill text-xl px-3"></i>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-
-                                {currentNav === 'bottle-filters' && (
-                                    <>
-                                        <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group ">
-                                            <img
-                                                className="transform h-80 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                                src="/images/new-product-2.png" alt="Tulip -528.webp"
-                                            />
-
-                                            <h1 className="flex absolute bottom-0 py-3 w-full text-white bg-primary text-xl justify-center items-center">
-                                                Bottle Filters
-                                            </h1>
-
-                                            <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                                <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                                    <i className="bi bi-eye-fill text-xl px-3"></i>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-
-                                {currentNav === 'filter-cartridges' && (
-                                    <>
-                                        {
-                                            [6, 7, 8,].map((item, index) => (
-
-                                                <div div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group " >
-                                                    <img
-                                                        className="transform h-80 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                                        src={`/images/p-${item}.webp`} alt={`p-${item}`}
-                                                    />
-
-                                                    <h1 className="flex absolute bottom-0 py-3 w-full text-white bg-primary text-xl justify-center items-center">
-                                                        Filter {item}
-                                                    </h1>
-
-                                                    <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                                        <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
-                                                            <i className="bi bi-eye-fill text-xl px-3"></i>
-                                                        </Link>
+                                                        <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
+                                                            <Link to="/products/water-filter-pitchers/Violet-529" className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                                                <i className="bi bi-eye-fill text-xl px-3"></i>
+                                                            </Link>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            ))
-                                        }
-                                    </>
-                                )}
+                                                ))}
+                                            </>
+                                        )
+                                    }
+                                    return (
+                                        <> </>
+                                    );
+                                })}
                             </div>
                         </div>
                     </li>
