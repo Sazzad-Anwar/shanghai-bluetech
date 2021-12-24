@@ -60,12 +60,12 @@ const Products = () => {
                             ))}
                         </> : <>
                             {[...Array(10)].map((_, i) => (
-                                <div keys={'demo' + i} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow animate__delay-1s">
+                                <div key={'demo' + i} className="item h-82 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block w-full relative group animate__animated animate__fadeIn wow animate__delay-1s">
                                     <div
                                         className="transform h-72 bg-gray-300 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
                                     />
 
-                                    <div className="p-10 animate-pulse w-full lg:w-96 bg-gray-500 text-transparent block h-full" />
+                                    <div className="p-10 animate-pulse w-full lg:w-96 bg-gray-500 text-transparent block h-10" />
                                 </div>
                             ))}
                         </>}

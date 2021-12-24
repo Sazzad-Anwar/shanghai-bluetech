@@ -103,7 +103,6 @@ const Home = () => {
             },
             600: {
                 items: 2,
-                margin: 50,
                 loop: true,
             },
             1024: {
@@ -162,23 +161,10 @@ const Home = () => {
 
                                 </OwlCarousel>
                                 : <OwlCarousel {...carousel2} className="owl-theme">
-                                    <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row items-center transform scale-100 hover:scale-105 transition duration-200 h-40 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
-                                        <div className="h-16 w-16 mr-3 rounded-full bg-secondary animate-pulse">
-                                            <span />
-                                        </div>
-                                        <h1 className="text-lg font-bold text-center text-secondary uppercase h-6 w-auto bg-secondary animate-pulse">Lorem ipsum dolor.</h1>
-                                    </div>
-                                    <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row items-center transform scale-100 hover:scale-105 transition duration-200 h-40 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
-                                        <div className="h-16 w-16 mr-3 rounded-full bg-secondary animate-pulse">
-                                            <span />
-                                        </div>
-                                        <h1 className="text-lg font-bold text-center text-secondary uppercase h-6 w-auto bg-secondary animate-pulse">Lorem ipsum dolor.</h1>
-                                    </div>
-                                    <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row items-center transform scale-100 hover:scale-105 transition duration-200 h-40 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
-                                        <div className="h-16 w-16 mr-3 rounded-full bg-secondary animate-pulse">
-                                            <span />
-                                        </div>
-                                        <h1 className="text-lg font-bold text-center text-secondary uppercase h-6 w-auto bg-secondary animate-pulse">Lorem ipsum dolor.</h1>
+                                    <div className="item h-82 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block w-full relative group animate__animated animate__fadeIn wow animate__delay-1s">
+                                        <div
+                                            className="transform h-full bg-gray-300 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
+                                        />
                                     </div>
                                 </OwlCarousel>}
 
@@ -212,10 +198,11 @@ const Home = () => {
                                 ))}
                             </OwlCarousel>
                             : <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
-                                <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                    <div className="shadow-lg border h-80 rounded-2xl bg-gray-300 animate-pulse flex justify-center items-center">
-                                        <Loader />
-                                    </div>
+                                <div className="item h-82 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block w-full relative group animate__animated animate__fadeIn wow animate__delay-1s">
+                                    <div
+                                        className="transform h-72 bg-gray-300 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
+                                    />
+                                    <div className="p-10 animate-pulse w-full lg:w-96 bg-gray-500 text-transparent block h-10" />
                                 </div>
                             </OwlCarousel>
                         }
@@ -225,23 +212,23 @@ const Home = () => {
                 {/* latest product section */}
                 <section className="my-20 bg-light-blue py-20">
                     <div className="container mx-auto">
-                        <div className="flex justify-between items-center">
+                        <div className="flex flex-col lg:flex-row justify-between items-center">
                             <div>
                                 {sections && sections.filter(section => section.index === 2)[0]?.title ?
                                     <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-left">
                                         {sections && sections.filter(section => section.index === 2)[0]?.title}
                                     </h1> :
-                                    <div className="h-6 lg:w-1/3 lg:ml-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-left"></div>
+                                    <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center"></div>
                                 }
-
                                 {sections && sections.filter(section => section.index === 2)[0]?.description ?
                                     <p className='text-base lg:w-2/3 lg:mr-auto text-gray-600 lg:text-lg font-semibold text-left mt-3'>
                                         {sections && sections.filter(section => section.index === 2)[0]?.description}
                                     </p> :
-                                    <div className="h-4 lg:w-2/3 lg:mr-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-left mt-3"></div>
+                                    <div className="h-4 lg:w-2/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-center mt-3"></div>
                                 }
                             </div>
                             <Link className="text-base lg:text-lg font-bold text-center w-24" to='/category/filter-cartridges'>View all</Link>
+
                         </div>
 
                         {latestFilters && latestFilters.length ? <>
@@ -267,10 +254,12 @@ const Home = () => {
                             </OwlCarousel>
                         </> :
                             <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
-                                <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                    <div className="shadow-lg border h-80 rounded-2xl bg-gray-300 animate-pulse flex justify-center items-center">
-                                        <Loader />
-                                    </div>
+                                <div className="item h-82 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block w-full relative group animate__animated animate__fadeIn wow animate__delay-1s">
+                                    <div
+                                        className="transform h-72 bg-gray-300 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
+                                    />
+
+                                    <div className="p-10 animate-pulse w-full lg:w-96 bg-gray-500 text-transparent block h-10" />
                                 </div>
                             </OwlCarousel>
                         }
@@ -318,7 +307,7 @@ const Home = () => {
                 {/* a product for every occation */}
                 <section className="my-20 bg-light-blue py-20">
                     <div className="container mx-auto">
-                        <div className="flex justify-between items-center">
+                        <div className="flex lg:flex-row flex-col justify-between items-center">
                             <div>
                                 {sections && sections.filter(section => section.index === 4)[0]?.title ?
                                     <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-left">
@@ -360,10 +349,11 @@ const Home = () => {
                             </OwlCarousel>
                         </> :
                             <OwlCarousel {...carousel3} className="owl-theme mt-14 w-full">
-                                <div className="item carousel-img h-82 w-63 mx-auto flex justify-center items-center lg:block lg:w-auto">
-                                    <div className="shadow-lg border h-80 rounded-2xl bg-gray-300 animate-pulse flex justify-center items-center">
-                                        <Loader />
-                                    </div>
+                                <div className="item h-82 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block w-full relative group animate__animated animate__fadeIn wow animate__delay-1s">
+                                    <div
+                                        className="transform h-72 bg-gray-300 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
+                                    />
+                                    <div className="p-10 animate-pulse w-full lg:w-96 bg-gray-500 text-transparent block h-10" />
                                 </div>
                             </OwlCarousel>
                         }
