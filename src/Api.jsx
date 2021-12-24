@@ -57,9 +57,10 @@ export const getLatestFilters = async () => {
     }
 }
 
-export const getNewModelProducts = async () => {
+export const getNewModelProducts = async (filtration) => {
     try {
-        const { data } = await axios.get(`${URL}/products?populate=*&filters[newModel][$eq]=true&sort[1]=id`);
+        console.log(filtration)
+        const { data } = await axios.get(`${URL}/products?populate=*&filters[${filtration}][$eq]=true&sort[1]=id`);
         return data;
     } catch (error) {
         return error.message

@@ -241,7 +241,7 @@ const Home = () => {
                                     <div className="h-4 lg:w-2/3 lg:mr-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-left mt-3"></div>
                                 }
                             </div>
-                            <Link className="text-base lg:text-lg font-bold text-center w-24" to='/products/filter-cartridges'>View all</Link>
+                            <Link className="text-base lg:text-lg font-bold text-center w-24" to='/category/filter-cartridges'>View all</Link>
                         </div>
 
                         {latestFilters && latestFilters.length ? <>
@@ -334,7 +334,7 @@ const Home = () => {
                                     <div className="h-4 lg:w-2/3 lg:mr-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-left mt-3"></div>
                                 }
                             </div>
-                            <Link className="text-base lg:text-lg font-bold text-center w-24" to='/products/new-models'>View all</Link>
+                            <Link className="text-base lg:text-lg font-bold text-center w-24" to='/category/new-models'>View all</Link>
                         </div>
 
                         {newModelProducts && newModelProducts.length ? <>

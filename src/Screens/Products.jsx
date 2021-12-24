@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { categoryProducts } from '../Api';
+import { categoryProducts, getNewModelProducts } from '../Api';
 import Breadcrumb from '../Components/Breadcrumb';
 import Layout from '../Components/Layout';
 
@@ -14,7 +14,22 @@ const Products = () => {
             const { data: productsData } = await categoryProducts(category);
             setProducts(productsData[0].attributes.products.data);
         };
-        getAPIData();
+
+        const getNewModelProductAPI = async (filtration) => {
+            const { data: productsData } = await getNewModelProducts(filtration);
+            setProducts(productsData);
+        };
+
+        if (category === 'new-models') {
+            getNewModelProductAPI('newModel');
+        }
+        else if (category === 'latest-models') {
+            getNewModelProductAPI('latest');
+        }
+        else {
+            getAPIData();
+        }
+
     }, [category]);
 
     return (
@@ -25,8 +40,8 @@ const Products = () => {
                     <h1 className="text-gray-600 text-xl lg:text-4xl font-semibold text-center pb-10">{pageTitle}</h1>
                     <div className="grid grid-cols-1 mb-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-4 sm:gap-x-4 sm:gap-y-6">
                         {products.length ? <>
-                            {products.map(product => (
-                                <div key={product.attributes.name} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow">
+                            {products.map((product, index) => (
+                                <div key={product.attributes.name + index} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow">
                                     <img
                                         className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
                                         src={product.attributes.images.data[0].attributes.formats.thumbnail.url} alt={product.attributes.images.data[0].attributes.alternativeText}
@@ -45,7 +60,7 @@ const Products = () => {
                             ))}
                         </> : <>
                             {[...Array(10)].map((_, i) => (
-                                <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow animate__delay-1s">
+                                <div keys={'demo' + i} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow animate__delay-1s">
                                     <div
                                         className="transform h-72 bg-gray-300 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
                                     />
@@ -55,11 +70,6 @@ const Products = () => {
                             ))}
                         </>}
                     </div>
-
-                    <div className="flex justify-center items-center">
-                        <h1 className="px-6 py-3 border rounded-lg shadow-lg text-white font-semibold cursor-pointer bg-primary text-center mx-auto">View More</h1>
-                    </div>
-
                 </div>
             </section>
         </Layout>
