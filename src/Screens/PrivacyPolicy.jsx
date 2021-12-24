@@ -1,7 +1,19 @@
 import Layout from './../Components/Layout';
 import Breadcrumb from './../Components/Breadcrumb';
+import { useEffect, useState } from 'react';
+import { privacyPolicy } from '../Api';
 
 const PrivacyPolicy = () => {
+
+    const [sections, setSections] = useState([]);
+
+    useEffect(() => {
+        const getAPIData = async () => {
+            const { data: sectionData } = await privacyPolicy();
+            setSections(sectionData.attributes.section);
+        };
+        getAPIData();
+    }, [])
 
     return (
         <Layout>
@@ -10,14 +22,25 @@ const PrivacyPolicy = () => {
                 <div className="container mx-auto">
                     <h1 className="text-gray-600 text-xl lg:text-4xl font-semibold text-center pb-10">Privacy Policy</h1>
 
-                    {([...Array(10)].map((_, i) => (
-                        <div key={i} className="my-10 animate__animated animate__fadeInDown wow">
-                            <h1 className="text-gray-600 text-xl lg:text-2xl font-semibold pb-5">Privacy Policy {i}</h1>
-                            <p className="text-gray-600 text-base">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure itaque incidunt cum in reprehenderit officiis natus, at laudantium error animi id necessitatibus est, blanditiis libero! Dolor, maiores. Iste aliquid, fuga magni minus eius nam qui ea quisquam. Ad nihil ut dignissimos repellat quibusdam vitae perspiciatis dolor quia tempora omnis blanditiis illo eos dolores error quaerat, minus autem deserunt, dicta hic nemo sit sunt laboriosam! Vel omnis praesentium, nulla exercitationem, sint at atque velit veritatis ipsum molestias obcaecati ea, temporibus inventore ipsam voluptate quidem neque modi cumque quia? Quisquam adipisci minus alias consequuntur. Unde fuga impedit quia, quibusdam voluptatibus rem blanditiis!
-                            </p>
-                        </div>
-                    )))}
+                    {sections.length ? <>
+                        {sections.map((section, index) => (
+                            <div key={section.index} className="my-10 animate__animated animate__fadeIn wow">
+                                <h1 className="text-gray-600 text-xl lg:text-2xl font-semibold pb-5">{section.title}</h1>
+                                <p className="text-gray-600 text-base">
+                                    {section.description}
+                                </p>
+                            </div>
+                        ))}
+                    </> : <>
+                        {([...Array(10)].map((_, i) => (
+                            <div key={i} className="my-10 animate__animated animate__fadeIn wow">
+                                <div className="p-5 animate-pulse w-full lg:w-96 bg-gray-300 text-transparent block h-5 rounded-xl my-1" />
+                                <div className="p-28 animate-pulse w-full bg-gray-300 text-transparent block h-28 rounded-xl my-1" />
+                            </div>
+                        )))}
+                    </>}
+
+
                 </div>
             </section>
         </Layout>

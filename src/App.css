@@ -37,6 +37,12 @@ html {
     scroll-behavior: smooth;
 }
 
+.youtube-video > div > iframe {
+    width: 560px !important;
+    height: 315px !important;
+    border-radius: 15px !important;
+}
+
 /* navbar style */
 /* header */
 .header {
@@ -65,28 +71,56 @@ html {
     border-radius: 5px;
     position: relative;
 }
-.menu-items li > a.nav-menu::after {
+
+.mega-menu-list li {
+    padding: 0.5rem 0rem;
+    border-radius: 5px;
+    position: relative;
+}
+
+.menu-items li > a.nav-menu::after,
+.mega-menu-list li > a::after {
     content: '';
     position: absolute;
     top: 35px;
     width: 0%;
     height: 3px;
-    background-color: #6ac9f3;
-    /* left: 0;
-    right: 0; */
+    background-color: #1c77ff;
     margin: auto;
     transition: width 0.3s ease-in-out;
 }
-.menu-items li:hover a.nav-menu::after {
+.mega-menu-list li > a::after {
+    left: 0%;
+}
+.menu-items li:hover a.nav-menu::after,
+.mega-menu-list li:hover > a::after {
     content: '';
-    width: 75%;
+    width: 3ch !important;
 }
 
-.menu-items li:hover > a {
-    color: #6ac9f3;
+.menu-items li:hover > a,
+.mega-menu-list li:hover > a {
+    color: #1c77ff;
 }
 
-.mega-menu-list li {
+.active-nav {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    position: relative;
+    color: #1c77ff;
+}
+.active-nav::after {
+    content: '';
+    position: absolute;
+    top: 35px;
+    width: 3ch !important;
+    height: 3px;
+    background-color: #1c77ff;
+    margin: auto;
+    transition: width 0.3s ease-in-out;
+}
+
+/* .mega-menu-list li {
     background-color: transparent;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
@@ -100,7 +134,7 @@ html {
 
 .mega-menu-list li:hover > a {
     color: #fff;
-}
+} */
 
 /* dropdown */
 .dropdown {

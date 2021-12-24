@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import { getCategories } from '../Api';
 
 const Nav = () => {
 
-    const [currentNav, setCurrentNav] = useState('filter-pitcher');
+    const [currentNav, setCurrentNav] = useState('');
     const [categories, setCategories] = useState([]);
+    const params = useParams();
 
     useEffect(() => {
         const menuBtn = document.querySelector('.menu-btn');
@@ -33,7 +34,7 @@ const Nav = () => {
 
         const getAPIdata = async () => {
             const { data: categoriesData } = await getCategories();
-            setCurrentNav((categoriesData[0].attributes.name.toLowerCase()).split(' ').join('-'))
+            setCurrentNav((categoriesData[0].attributes.link))
             setCategories(categoriesData);
         }
 
@@ -66,12 +67,12 @@ const Nav = () => {
                 </div>
                 <ul className="menu-items">
                     <li>
-                        <Link to="/" className="menu-item text-lg nav-menu font-semibold flex items-center">
+                        <NavLink to="/" className={({ isActive }) => isActive ? "active-nav menu-item text-lg nav-menu font-semibold flex items-center" : "menu-item text-lg nav-menu font-semibold flex items-center"}>
                             <span>Home</span>
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <a onClick={() => { }} className="menu-item expand-btn text-lg nav-menu font-semibold">
+                        <a onClick={() => { }} className={(params.category || params.products) ? "active-nav menu-item expand-btn text-lg nav-menu font-semibold" : "menu-item expand-btn text-lg nav-menu font-semibold"}>
                             <div className="flex items-center">
                                 <span>
                                     Products
@@ -83,13 +84,13 @@ const Nav = () => {
                             <div className="content container mx-auto grid grid-cols-6 gap-2 items-center">
                                 <ul className="list-none mega-menu-list">
                                     {categories && categories.map((category) => (
-                                        <li key={category.id} onMouseOver={() => setCurrentNav((category.attributes.name.toLowerCase()).split(' ').join('-'))}>
-                                            <Link to={`/category/${(category.attributes.name.toLowerCase()).split(' ').join('-')}`} className="py-2 text-lg">{category.attributes.name}</Link>
+                                        <li key={category.id} onMouseOver={() => setCurrentNav(category.attributes.link)}>
+                                            <Link to={`/category/${category.attributes.link}`} className="py-2 text-lg">{category.attributes.name}</Link>
                                         </li>
                                     ))}
                                 </ul>
                                 {categories && categories.map(category => {
-                                    if (currentNav === (category.attributes.name.toLowerCase()).split(' ').join('-')) {
+                                    if (currentNav === (category.attributes.link)) {
                                         return (
                                             <>
                                                 {category.attributes.products.data.slice(0, 4).map(product => (
@@ -121,31 +122,31 @@ const Nav = () => {
                         </div>
                     </li>
                     <li>
-                        <Link to="/services" className="menu-item text-lg nav-menu font-semibold">
+                        <NavLink to="/services" className={({ isActive }) => isActive ? "active-nav menu-item text-lg nav-menu font-semibold flex items-center" : "menu-item text-lg nav-menu font-semibold flex items-center"}>
                             <div className="flex items-center">
                                 <span>
                                     Services
                                 </span>
                             </div>
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to="/about-us" className="menu-item text-lg nav-menu font-semibold">
+                        <NavLink to="/about-us" className={({ isActive }) => isActive ? "active-nav menu-item text-lg nav-menu font-semibold flex items-center" : "menu-item text-lg nav-menu font-semibold flex items-center"}>
                             <div className="flex items-center">
                                 <span>
                                     About Us
                                 </span>
                             </div>
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <Link to="/contact-us" className="menu-item text-lg nav-menu font-semibold">
+                        <NavLink to="/contact-us" className={({ isActive }) => isActive ? "active-nav menu-item text-lg nav-menu font-semibold flex items-center" : "menu-item text-lg nav-menu font-semibold flex items-center"}>
                             <div className="flex items-center">
                                 <span>
                                     Contact Us
                                 </span>
                             </div>
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
                         <a onClick={() => { }} className=''>

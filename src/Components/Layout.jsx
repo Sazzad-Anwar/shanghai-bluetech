@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import Nav from './Nav';
 import { CopyrightOutlined, LoadingOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react';
-import { getCategories, getCompanyAddress, sendMsg } from '../Api';
+import { getCategories, getCompanyAddress, getMetaTags, sendMsg } from '../Api';
+import { Helmet } from "react-helmet";
+
 const { TextArea } = Input;
 
 const Layout = ({ children, className }) => {
@@ -13,6 +15,7 @@ const Layout = ({ children, className }) => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
+    const [metaTags, setMetaTags] = useState([]);
 
     let goTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -22,6 +25,8 @@ const Layout = ({ children, className }) => {
         const getAPIdata = async () => {
             const { data: categoriesData } = await getCategories();
             const { data: address } = await getCompanyAddress();
+            const { data: metaData } = await getMetaTags();
+            setMetaTags(metaData);
             setCompanyAddress(address[0].attributes)
             setCategories(categoriesData);
         }
@@ -50,6 +55,12 @@ const Layout = ({ children, className }) => {
 
     return (
         <div className={className}>
+            <Helmet>
+                <meta name="author" content='Mohammad Sazzad Bin Anwar' />
+                {metaTags && metaTags.map(metaTag => (
+                    <meta key={metaTag.id} name={metaTag.attributes.name} content={metaTag.attributes.content} />
+                ))}
+            </Helmet>
             <Nav />
             {children}
 
@@ -60,8 +71,8 @@ const Layout = ({ children, className }) => {
                 backgroundAttachment: 'fixed'
             }}>
                 <div className="container mx-auto">
-                    <h1 className="text-xl lg:text-3xl font-bold text-center text-white animate__animated animate__fadeInDown wow">Send Message To Supplier</h1>
-                    <div className="flex justify-center items-center mb-10 animate__animated animate__fadeInDown wow animate__delay-1s">
+                    <h1 className="text-xl lg:text-3xl font-bold text-center text-white animate__animated animate__fadeIn wow">Send Message To Supplier</h1>
+                    <div className="flex justify-center items-center mb-10 animate__animated animate__fadeIn wow animate__delay-1s">
                         <form onSubmit={sendMessage} className="bg-white my-6 lg:my-20 p-4 lg:p-8 shadow-xl border rounded-xl">
                             <Input value={name} onChange={e => setName(e.target.value)} type='text' className="my-3 py-3" placeholder="Name" />
                             <Input value={email} onChange={e => setEmail(e.target.value)} type="email" className="my-3 py-3" placeholder="Email" />

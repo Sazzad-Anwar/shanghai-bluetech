@@ -2,11 +2,50 @@ import Layout from './../Components/Layout';
 import Breadcrumb from './../Components/Breadcrumb';
 import OwlCarousel from 'react-owl-carousel';
 import { Tabs, Steps, Image } from 'antd';
+import { useState, useEffect } from 'react';
+import { aboutUsSection, getCertificates, getCompanyDescription, getCompanyProfile, getCompanyTimeline, getPartners, getWorkingProcess, getWorkingSteps } from '../Api';
 
 const { TabPane } = Tabs;
 const { Step } = Steps;
 
 const AboutUs = () => {
+
+    const [sections, setSections] = useState([]);
+    const [companyDescription, setCompanyDescription] = useState({});
+    const [companyProfiles, setCompanyProfiles] = useState([]);
+    const [timeLines, setTimeLines] = useState([]);
+    const [workingProcesses, setWorkingProcesses] = useState([]);
+    const [workingSteps, setWorkingSteps] = useState([]);
+    const [partners, setPartners] = useState([]);
+    const [certificates, setCertificates] = useState([]);
+
+    useEffect(() => {
+        const getApiData = async () => {
+            const { data: sectionData } = await aboutUsSection();
+            const { data: companyDescriptionData } = await getCompanyDescription();
+            const { data: companyProfileData } = await getCompanyProfile();
+            const { data: timeLineData } = await getCompanyTimeline();
+            const { data: workingProcessData } = await getWorkingProcess();
+            const { data: workingStepData } = await getWorkingSteps();
+            const { data: partnerData } = await getPartners();
+            const { data: certificateData } = await getCertificates();
+
+            setCertificates(certificateData);
+            setPartners(partnerData);
+            setWorkingSteps(workingStepData);
+            setWorkingProcesses(workingProcessData);
+            setTimeLines(timeLineData);
+            setCompanyProfiles(companyProfileData);
+            setCompanyDescription(companyDescriptionData[0].attributes);
+            setSections(sectionData.attributes.section);
+        }
+
+        getApiData();
+    }, []);
+
+    const iframe = () => {
+        return { __html: companyDescription.youtubeLink }
+    }
 
     let carousel = {
         margin: 10,
@@ -110,124 +149,143 @@ const AboutUs = () => {
 
             <section className="my-10">
                 <div className="container mx-auto">
-                    <h1 className="text-gray-600 text-2xl lg:text-4xl font-semibold text-center pb-3">
-                        BLUETECH WATER TREATMENT TECHNOLOGY
-                    </h1>
+                    {sections && sections.filter(section => section.index === 1)[0]?.title ?
+                        <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">
+                            {sections && sections.filter(section => section.index === 1)[0]?.title}
+                        </h1> :
+                        <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center"></div>
+                    }
+
+                    {sections && sections.filter(section => section.index === 1)[0]?.description ?
+                        <p className='text-base lg:w-2/3 lg:mx-auto text-gray-600 lg:text-lg font-semibold text-center my-5'>
+                            {sections && sections.filter(section => section.index === 1)[0]?.description}
+                        </p> :
+                        <div className="h-4 lg:w-2/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-center my-5"></div>
+                    }
                 </div>
             </section>
 
             {/* video introduction */}
             <section className="my-20">
                 <div className="container mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <div className="text-right overflow-hidden">
-                            <iframe className="border rounded-xl shadow-lg" width="560" height="315" src="https://www.youtube.com/embed/TsImAOX6lqc" title="Shanghai Bluetech" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    {companyDescription.title ? <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div className="text-right overflow-hidden youtube-video">
+                            <div dangerouslySetInnerHTML={iframe()}></div>
                         </div>
                         <div>
                             <h1 className="text-xl lg:text-3xl text-gray-600 text-center lg:text-left font-semibold mb-6">
-                                Shanghai Bluetech Co.Ltd
+                                {companyDescription.title}
                             </h1>
                             <p className="text-lg text-gray-600 block mt-6">
-                                Shanghai Bluetech Co., Ltd. was founded in 2003 and mainly undertakes research and development of water purification technologies and the production of water purification technologies and the production of drinking water filtration systems. Our company upholds the ideals of marking more healthy purified water with greater taste and care for the public's health. Our company was located in Nanqiao Town, Fengxian District in Shanghai with convenient transportation. It is 35km from Pudong international airport, 25km from Hongqiao airport and 25km from Luchao Deepwater port.
+                                {companyDescription.description}
                             </p>
                         </div>
-                    </div>
+                    </div> : <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div className="text-right overflow-hidden">
+                            <div className='w-full animate-pulse h-80 bg-gray-300 rounded-lg'></div>
+                        </div>
+                        <div>
+                            <div className="h-7 w-full animate-pulse bg-gray-300 rounded-xl text-center mb-6" />
+
+                            <div className="h-36 animate-pulse bg-gray-300 rounded-xl mt-6" />
+                        </div>
+                    </div>}
+
                 </div>
             </section>
 
             {/* company profile */}
             <section className="my-20 py-20">
                 <div className="container mx-auto">
-                    <h1 className="text-gray-600 text-2xl lg:text-4xl font-semibold text-center pb-3">
-                        Company Profile
-                    </h1>
-                    <OwlCarousel className='owl-theme' {...carousel}>
-                        <div className="item my-5">
-                            <div className="bg-white border rounded-xl shadow-xl overflow-hidden group">
-                                <img className="w-auto block h-auto card-image" src="/images/OEM.png" alt="oem" />
-                                <p className="text-base p-6 text-gray-600 block h-52">
-                                    Factory automation is used in our factory to ensure the precise accuracy of our products and as well as improve the yield of our products. this dramatically removes human errors and strengthens our production capability.
-                                </p>
-                            </div>
-                        </div>
+                    {sections && sections.filter(section => section.index === 2)[0]?.title ?
+                        <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">
+                            {sections && sections.filter(section => section.index === 2)[0]?.title}
+                        </h1> :
+                        <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center"></div>
+                    }
 
-                        <div className="item my-5">
-                            <div className="bg-white border rounded-xl shadow-xl overflow-hidden group">
-                                <img className="w-auto block h-auto card-image" src="/images/OEM.png" alt="oem" />
-                                <p className="text-base p-6 text-gray-600 block h-52">
-                                    Every product produced in Shanghai Bluetech CO.LTD is precisely engineered to be perfect. The products Produced in Shanghai Bluetech CO.LTD has always maintained the highest standard of quality and will continue to do so in the prolonged future. Shanghai Bluetech promises to improve its quality cont
-                                </p>
-                            </div>
-                        </div>
+                    {sections && sections.filter(section => section.index === 2)[0]?.description ?
+                        <p className='text-base lg:w-2/3 lg:mx-auto text-gray-600 lg:text-lg font-semibold text-center my-5'>
+                            {sections && sections.filter(section => section.index === 2)[0]?.description}
+                        </p> :
+                        <div className="h-4 lg:w-2/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-center my-5"></div>
+                    }
+                    {companyProfiles.length ? <>
+                        <OwlCarousel className='owl-theme' {...carousel}>
+                            {companyProfiles.map((companyProfile) => (
+                                <div key={companyProfile.attributes.createdAt} className="item my-5">
+                                    <div className="bg-white border rounded-xl shadow-xl overflow-hidden group">
+                                        <img className="w-auto block h-auto card-image" src={companyProfile.attributes.image.data[0].attributes.url} alt={companyProfile.attributes.image.data[0].attributes.alternativeText} />
+                                        <p className="text-base p-6 text-gray-600 block h-52">
+                                            {companyProfile.attributes.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </OwlCarousel>
+                    </> : <OwlCarousel className='owl-theme' {...carousel}>
 
-                        <div className="item my-5">
-                            <div className="bg-white border rounded-xl shadow-xl overflow-hidden group">
-                                <img className="w-auto block h-auto card-image" src="/images/OEM.png" alt="oem" />
-                                <p className="text-base p-6 text-gray-600 block h-52">
-                                    With highly skilled trained workers and production units, Bluetech is able to deliver the best possible quality products in the least amount of time. Bluetech also ensures the quality of life of the workers and the production team.
-                                </p>
+                        {[1, 2, 3, 4, 5].map((item, index) => (
+                            <div key={item + ' ' + index} className="item my-5">
+                                <div className="bg-white animate-pulse border rounded-xl shadow-xl overflow-hidden group">
+                                    <div className="w-auto bg-gray-300 block h-52 card-image" />
+                                    <div className='p-6'>
+                                        <div className="p-2 animate-pulse  bg-gray-300 text-transparent block h-2 w-full rounded-xl my-1" />
+                                        <div className="p-2 animate-pulse  bg-gray-300 text-transparent block h-2 w-full rounded-xl my-1" />
+                                        <div className="p-2 animate-pulse  bg-gray-300 text-transparent block h-2 w-full rounded-xl my-1" />
+                                        <div className="p-2 animate-pulse  bg-gray-300 text-transparent block h-2 w-full rounded-xl my-1" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="item my-5">
-                            <div className="bg-white border rounded-xl shadow-xl overflow-hidden group">
-                                <img className="w-auto block h-auto card-image" src="/images/OEM.png" alt="oem" />
-                                <p className="text-base p-6 text-gray-600 block h-52">
-                                    Unmatched charismatic labor of workers and brilliant development team behind it ensures the best production process responsible for making the product safe for everyone including the consumers and the producers.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="item my-5">
-                            <div className="bg-white border rounded-xl shadow-xl overflow-hidden group">
-                                <img className="w-auto block h-auto card-image" src="/images/OEM.png" alt="oem" />
-                                <p className="text-base p-6 text-gray-600 block h-52">
-                                    Unmatched charismatic labor of workers and brilliant development team behind it ensures the best production process responsible for making the product safe for everyone including the consumers and the producers.
-                                </p>
-                            </div>
-                        </div>
-
-                    </OwlCarousel>
+                        ))}
+                    </OwlCarousel>}
                 </div>
             </section>
 
             {/* company timeline */}
             <section className="my-20">
                 <div className="container mx-auto">
-                    <h1 className="text-gray-600 text-2xl lg:text-4xl font-semibold text-center my-10">
-                        Timeline
-                    </h1>
+                    {sections && sections.filter(section => section.index === 3)[0]?.title ?
+                        <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">
+                            {sections && sections.filter(section => section.index === 3)[0]?.title}
+                        </h1> :
+                        <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center"></div>
+                    }
+
+                    {sections && sections.filter(section => section.index === 3)[0]?.description ?
+                        <p className='text-base lg:w-2/3 lg:mx-auto text-gray-600 lg:text-lg font-semibold text-center my-5'>
+                            {sections && sections.filter(section => section.index === 3)[0]?.description}
+                        </p> :
+                        <div className="h-4 lg:w-2/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-center my-5"></div>
+                    }
                     <Tabs tabPosition='left' size="large">
-                        <TabPane tab="2012-01" key="2012-01">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                <img className="rounded-xl" src="/images/time-line-1.png" alt="time-line-1" />
-                                <div className="p-0 lg:p-8 flex flex-col justify-center">
-                                    <p className="text-base text-tertiary font-semibold my-2">2012-01</p>
-                                    <h1 className="text-xl lg:text-2xl font-bold">German TUV food grade certificate</h1>
-                                    <p className="text-base my-4">This year Shanghai Bluetech passed the German TUV food-grade certification program. that allows Bluetech to have an impactful business on the EU filter market.</p>
-                                </div>
-                            </div>
-                        </TabPane>
-                        <TabPane tab="2003-01" key="2003-01">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                <img className="rounded-xl" src="/images/time-line-2.png" alt="time-line-1" />
-                                <div className="p-0 lg:p-8 flex flex-col justify-center">
-                                    <p className="text-base text-tertiary font-semibold my-2">2003-01</p>
-                                    <h1 className="text-xl lg:text-2xl font-bold">Company formation</h1>
-                                    <p className="text-base my-4">Shanghai Bluetech was founded in 2003</p>
-                                </div>
-                            </div>
-                        </TabPane>
-                        <TabPane tab="2008-01" key="2008-01">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                                <img className="rounded-xl" src="/images/time-line-3.png" alt="time-line-1" />
-                                <div className="p-0 lg:p-8 flex flex-col justify-center">
-                                    <p className="text-base text-tertiary font-semibold my-2">2008-01</p>
-                                    <h1 className="text-xl lg:text-2xl font-bold">Bluetech became a high-tech company</h1>
-                                    <p className="text-base my-4">Shanghai Bluetech CO.LTD first time became the high-tech company in this field of industry. This is a big event for the Company.</p>
-                                </div>
-                            </div>
-                        </TabPane>
+                        {timeLines.length ? <>
+                            {timeLines.map((timeLine) => (
+                                <TabPane tab={timeLine.attributes.time} key={timeLine.attributes.time}>
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                        <img className="rounded-xl" src={timeLine.attributes.image.data.attributes.url} alt="time-line-1" />
+                                        <div className="p-0 lg:p-8 flex flex-col justify-center">
+                                            <p className="text-base text-tertiary font-semibold my-2">{timeLine.attributes.time}</p>
+                                            <h1 className="text-xl lg:text-2xl font-bold">{timeLine.attributes.title}</h1>
+                                            <p className="text-base my-4">{timeLine.attributes.description}</p>
+                                        </div>
+                                    </div>
+                                </TabPane>
+                            ))}
+                        </> : <>
+                            {['01', '02', '03'].map((item, index) => (
+                                <TabPane tab={item + index} key={item + index}>
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                        <div className="rounded-xl animate-pulse h-44 lg:h-96 bg-gray-300" />
+                                        <div className="p-0 lg:p-8 flex flex-col justify-center">
+                                            <div className="p-2 animate-pulse w-full lg:w-96 bg-gray-300 text-transparent block h-1 rounded-xl my-1" />
+                                            <div className="p-3 animate-pulse w-full lg:w-96 bg-gray-300 text-transparent block h-3 rounded-xl my-1" />
+                                            <div className="p-2 animate-pulse w-full lg:w-96 bg-gray-300 text-transparent block h-2 rounded-xl my-1" />
+                                        </div>
+                                    </div>
+                                </TabPane>
+                            ))}
+                        </>}
                     </Tabs>
                 </div>
             </section>
@@ -235,146 +293,174 @@ const AboutUs = () => {
             {/* what can we do */}
             <section className="my-20 py-20 bg-light-blue">
                 <div className="container mx-auto">
-                    <h1 className="text-gray-600 text-2xl lg:text-4xl font-semibold text-center my-10">
-                        What can we do?
-                    </h1>
+                    {sections && sections.filter(section => section.index === 4)[0]?.title ?
+                        <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">
+                            {sections && sections.filter(section => section.index === 4)[0]?.title}
+                        </h1> :
+                        <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center"></div>
+                    }
 
-                    <OwlCarousel {...carousel2} className="owl-theme mx-auto">
-                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
-                            <div className='p-5 text-center flex justify-center items-center'>
-                                <div className="h-12 w-12">
-                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/design.png" alt="design" />
+                    {sections && sections.filter(section => section.index === 4)[0]?.description ?
+                        <p className='text-base lg:w-2/3 lg:mx-auto text-gray-600 lg:text-lg font-semibold text-center my-5'>
+                            {sections && sections.filter(section => section.index === 4)[0]?.description}
+                        </p> :
+                        <div className="h-4 lg:w-2/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-center my-5"></div>
+                    }
+
+                    {workingProcesses.length ? <>
+                        <OwlCarousel {...carousel2} className="owl-theme mx-auto">
+                            {workingProcesses.map((workingProcess) => (
+                                <div key={workingProcess.attributes.createdAt} className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
+                                    <div className='p-5 text-center flex justify-center items-center'>
+                                        <div className="h-12 w-12">
+                                            <img className='p-3 rounded-full bg-dark-blue' src={workingProcess.attributes.icon.data.attributes.url} alt={workingProcess.attributes.icon.data.attributes.name} />
+                                        </div>
+                                    </div>
+                                    <div className="h-20">
+                                        <p className='px-3 text-lg font-semibold text-center'>
+                                            {workingProcess.attributes.title}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </OwlCarousel>
+
+                    </> :
+                        <OwlCarousel {...carousel2} className="owl-theme mx-auto">
+                            {['01', '02', '03', '04', '05'].map((item, index) => (
+                                <div key={index + item} className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
+                                    <div className='p-5 text-center flex justify-center items-center'>
+                                        <div className='h-12 w-12 animate-pulse rounded-full bg-gray-300' />
+                                    </div>
+                                    <div className="h-20 p-3">
+                                        <div className="w-full p-3 animate-pulse bg-gray-300 text-transparent block h-3 rounded-xl my-1" />
+                                    </div>
+                                </div>
+                            ))}
+                        </OwlCarousel>
+                    }
+
+                    {workingSteps.length ? <>
+                        {workingSteps.map((workingStep) => (
+                            <div key={workingStep.attributes.title} className='my-10'>
+                                <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center my-5">
+                                    {workingStep.attributes.title}
+                                </h1>
+                                <div className='p-5 shadow-xl border-2 border-white rounded-xl text-center'>
+                                    <Steps size="small" current={workingStep.attributes.steps.length + 1}>
+                                        {workingStep.attributes.steps.map((step) => (
+                                            <Step key={step} title={<span className='font-semibold'>{step}</span>} />
+                                        ))}
+                                    </Steps>
                                 </div>
                             </div>
-                            <div className="h-20">
-                                <p className='px-3 text-lg font-semibold text-center'>
-                                    OEM production of available designs
-                                </p>
-                            </div>
+                        ))}
+                    </> : <div className='my-10'>
+                        <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center my-5" />
+                        <div className='p-5 shadow-xl border-2 border-white rounded-xl text-center'>
+                            <Steps size="small" current={8}>
+                                <Step title={<span className='font-semibold'>
+                                    <div className="w-full p-3 animate-pulse bg-gray-300 text-transparent block h-3 rounded-xl my-1" />
+                                </span>} />
+                                <Step title={<span className='font-semibold'>
+                                    <div className="w-full p-3 animate-pulse bg-gray-300 text-transparent block h-3 rounded-xl my-1" />
+                                </span>} />
+                                <Step title={<span className='font-semibold'>
+                                    <div className="w-full p-3 animate-pulse bg-gray-300 text-transparent block h-3 rounded-xl my-1" />
+                                </span>} />
+                                <Step title={<span className='font-semibold'>
+                                    <div className="w-full p-3 animate-pulse bg-gray-300 text-transparent block h-3 rounded-xl my-1" />
+                                </span>} />
+                                <Step title={<span className='font-semibold'>
+                                    <div className="w-full p-3 animate-pulse bg-gray-300 text-transparent block h-3 rounded-xl my-1" />
+                                </span>} />
+                                <Step title={<span className='font-semibold'>
+                                    <div className="w-full p-3 animate-pulse bg-gray-300 text-transparent block h-3 rounded-xl my-1" />
+                                </span>} />
+                                <Step title={<span className='font-semibold'>
+                                    <div className="w-full p-3 animate-pulse bg-gray-300 text-transparent block h-3 rounded-xl my-1" />
+                                </span>} />
+                            </Steps>
                         </div>
+                    </div>}
 
-                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
-                            <div className='p-5 text-center flex justify-center items-center'>
-                                <div className="h-12 w-12">
-                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/time.png" alt="time" />
-                                </div>
-                            </div>
-                            <div className="h-20">
-                                <p className='px-3 text-lg font-semibold text-center'>
-                                    Production in required time and quantity
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
-                            <div className='p-5 text-center flex justify-center items-center'>
-                                <div className="h-12 w-12">
-                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/flight.png" alt="flight" />
-                                </div>
-                            </div>
-                            <div className="h-20">
-                                <p className='px-3 text-lg font-semibold text-center'>
-                                    Ensure production and shipment quality
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
-                            <div className='p-5 text-center flex justify-center items-center'>
-                                <div className="h-12 w-12">
-                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/place.png" alt="place" />
-                                </div>
-                            </div>
-                            <div className="h-20">
-                                <p className='px-3 text-lg font-semibold text-center'>
-                                    Keep track of the product for the customer during shipment
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="w-full sm:w-80 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 border-white my-5">
-                            <div className='p-5 text-center flex justify-center items-center'>
-                                <div className="h-12 w-12">
-                                    <img className='p-3 rounded-full bg-dark-blue' src="/images/support_agent.png" alt="support_agent" />
-                                </div>
-                            </div>
-                            <div className="h-20">
-                                <p className='px-3 text-lg font-semibold text-center'>
-                                    Provide technical support for customers after sales
-                                </p>
-                            </div>
-                        </div>
-                    </OwlCarousel>
-
-                    <div className='my-10 p-5 shadow-xl border-2 border-white rounded-xl text-center'>
-                        <Steps size="small" current={8}>
-                            <Step title={<span className='font-semibold'>Choose Your design</span>} />
-                            <Step title={<span className='font-semibold'>Cost estimation</span>} />
-                            <Step title={<span className='font-semibold'>Design confirmation</span>} />
-                            <Step title={<span className='font-semibold'>Orders and payment</span>} />
-                            <Step title={<span className='font-semibold'>Transaction completion</span>} />
-                            <Step title={<span className='font-semibold'>Sales and logistic operation</span>} />
-                            <Step title={<span className='font-semibold'>Shipment arrived</span>} />
-                            <Step title={<span className='font-semibold'>Enjoy cleaner water</span>} />
-                        </Steps>
-                    </div>
                 </div>
             </section>
 
-            {/* what can we do */}
+            {/* Partners */}
             <section className="my-20">
                 <div className="container mx-auto">
-                    <h1 className="text-gray-600 text-2xl lg:text-4xl font-semibold text-center my-10">
-                        Partners
-                    </h1>
+                    {sections && sections.filter(section => section.index === 5)[0]?.title ?
+                        <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">
+                            {sections && sections.filter(section => section.index === 5)[0]?.title}
+                        </h1> :
+                        <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center"></div>
+                    }
 
-                    <OwlCarousel {...carousel2} className="owl-theme mx-auto">
-                        <div className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
-                            <img className='h-auto flex rounded-lg' src="/images/amazon.png" alt="amazon" />
-                        </div>
-                        <div className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
-                            <img className='h-auto flex rounded-lg' src="/images/walmart.png" alt="walmart" />
-                        </div>
-                        <div className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
-                            <img className='h-auto flex rounded-lg' src="/images/alibaba.svg" alt="alibaba" />
-                        </div>
-                        <div className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
-                            <img className='h-auto flex rounded-lg' src="/images/PayPal.svg" alt="paypal" />
-                        </div>
-                    </OwlCarousel>
+                    {sections && sections.filter(section => section.index === 5)[0]?.description ?
+                        <p className='text-base lg:w-2/3 lg:mx-auto text-gray-600 lg:text-lg font-semibold text-center my-5'>
+                            {sections && sections.filter(section => section.index === 5)[0]?.description}
+                        </p> :
+                        <div className="h-4 lg:w-2/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-center my-5"></div>
+                    }
+
+                    {partners.length ? <>
+                        <OwlCarousel {...carousel2} className="owl-theme mx-auto">
+                            {partners.map((partner) => (
+                                <div key={partner.attributes.name} className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
+                                    <img className='h-auto flex rounded-lg' src={partner.attributes.image.data.attributes.url} alt={partner.attributes.name} />
+                                </div>
+                            ))}
+                        </OwlCarousel>
+                    </> : <>
+                        <OwlCarousel {...carousel2} className="owl-theme mx-auto">
+                            {['01partner', '0201partner', '0301partner', '0401partner', '0501partner'].map((item, index) => (
+                                <div key={item + index} className="w-full sm:w-80 h-36 flex justify-center items-center p-4 shadow-xl rounded-xl overflow-hidden bg-transparent border-2 my-5">
+                                    <div className='h-full w-full bg-gray-300 animate-pulse flex rounded-lg' />
+                                </div>
+                            ))}
+                        </OwlCarousel>
+                    </>}
                 </div>
             </section>
 
             {/* what can we do */}
-            <section className="my-20 py-20 bg-light-blue">
+            <section className="py-20 bg-light-blue">
                 <div className="container mx-auto">
-                    <h1 className="text-gray-600 text-2xl lg:text-4xl font-semibold text-center my-10">
-                        Company's Achievement and Certifiacations
-                    </h1>
+                    {sections && sections.filter(section => section.index === 6)[0]?.title ?
+                        <h1 className="text-2xl text-gray-600 lg:text-4xl font-bold text-center">
+                            {sections && sections.filter(section => section.index === 6)[0]?.title}
+                        </h1> :
+                        <div className="h-6 lg:w-1/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-9 animate-pulse text-center"></div>
+                    }
 
-                    <OwlCarousel {...carousel3} className="owl-theme md:mx-auto">
-                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
-                            <Image className='h-96 w-full rounded-lg' src="/images/cert-1.png" alt="cert-1" />
-                        </div>
-                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
-                            <Image className='h-96 w-full rounded-lg' src="/images/cert-2.png" alt="cert-2" />
-                        </div>
-                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
-                            <Image className='h-96 w-full rounded-lg' src="/images/cert-3.png" alt="cert-3" />
-                        </div>
-                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
-                            <Image className='h-96 w-full rounded-lg' src="/images/cert-4.png" alt="cert-4" />
-                        </div>
-                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
-                            <Image className='h-96 w-full rounded-lg' src="/images/cert-5.png" alt="cert-5" />
-                        </div>
-                        <div className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
-                            <Image className='h-96 w-full rounded-lg' src="/images/cert-6.png" alt="cert-6" />
-                        </div>
-                    </OwlCarousel>
+                    {sections && sections.filter(section => section.index === 6)[0]?.description ?
+                        <p className='text-base lg:w-2/3 lg:mx-auto text-gray-600 lg:text-lg font-semibold text-center my-5'>
+                            {sections && sections.filter(section => section.index === 6)[0]?.description}
+                        </p> :
+                        <div className="h-4 lg:w-2/3 lg:mx-auto rounded-xl bg-gray-300 lg:h-5 animate-pulse text-center my-5"></div>
+                    }
+
+                    {certificates.length ? <>
+                        <OwlCarousel {...carousel3} className="owl-theme md:mx-auto">
+                            {certificates.map((certificate) => (
+                                <div key={certificate.attributes.name} className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
+                                    <Image className='h-96 w-full rounded-lg' src={certificate.attributes.image.data.attributes.url} alt={certificate.attributes.name} />
+                                </div>
+                            ))}
+                        </OwlCarousel>
+                    </> : <>
+                        <OwlCarousel {...carousel2} className="owl-theme mx-auto">
+                            {['c', '02c', '03c', '04c', '05c'].map((item, index) => (
+                                <div key={item + index} className="shadow-xl w-auto sm:w-64 p-0 flex justify-center items-center rounded-xl overflow-hidden bg-transparent border-4 border-blue-900 my-5">
+                                    <div className='h-96 bg-gray-300 animate-pulse w-full rounded-lg' />
+                                </div>
+                            ))}
+                        </OwlCarousel>
+                    </>}
                 </div>
             </section>
-        </Layout>
+        </Layout >
     )
 }
 

@@ -3,7 +3,7 @@ import OwlCarousel from 'react-owl-carousel';
 import { Link } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { useEffect, useState } from 'react';
-import { getBulletCard, getHomePageSections, getLatestFilters, getMarketingImage, getNewModelProducts, getSliders, getTestimonials } from '../Api';
+import { getBulletCard, getHomePageSections, getLatestFilters, getMarketingImage, getNewModelProducts, getTestimonials } from '../Api';
 import Loader from '../Components/Loader';
 const { TabPane } = Tabs;
 
@@ -22,7 +22,6 @@ const Home = () => {
         document.title = 'Bluetech | Home'
 
         let getSliderData = async () => {
-            const { data } = await getSliders('home-page');
             const { data: images } = await getMarketingImage();
             const { data: cards } = await getBulletCard();
             const { data: testimonialData } = await getTestimonials();
@@ -36,7 +35,7 @@ const Home = () => {
             setTestimonials(testimonialData);
             setBulletCards(cards);
             setMarketingImages(images)
-            setSliders(data[0]?.attributes?.images?.data);
+            setSliders(sectionsData.attributes.banner.data);
         }
 
         getSliderData();
