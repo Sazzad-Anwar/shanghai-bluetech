@@ -5,6 +5,8 @@ import { useParams } from 'react-router';
 import OwlCarousel from 'react-owl-carousel';
 import { Link } from 'react-router-dom';
 import { categoryProducts, getProductDetails } from '../Api';
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 const Product = () => {
 
@@ -27,8 +29,6 @@ const Product = () => {
         }
         getAPIdata();
     }, [product, category]);
-
-    console.log(productDetails)
 
     let carousel3 = {
         margin: 15,
@@ -107,28 +107,20 @@ const Product = () => {
                             <h1 className="text-gray-600 text-xl lg:text-3xl font-semibold text-left pb-10">
                                 {productCategory} {pageTitle}
                             </h1>
-                            <p className="text-base lg:text-lg text-gray-600">
-                                Violet is Bluetech's Top selling water filter pitcher model by far. Everyone loves this design for it's simplicity and high capacity to hold more water. It come's in many different colors and is also compatible with most filters available in the market. It's easy to set up and use. All these features combines makes it one of the most desirable models of water filter pitchers in our catalog.
-                            </p>
 
-                            <div className="mt-7">
+                            {productDetails?.description ? <p className="text-base lg:text-lg text-gray-600"> {productDetails?.description} </p> :
+                                <div className="h-40 w-full bg-gray-300 animate-pulse rounded-xl" />
+                            }
+
+
+                            <div className="mt-20">
                                 <h1 className="text-gray-600 text-xl lg:text-3xl font-semibold text-left pb-5">
                                     Specificaiton
                                 </h1>
-                                <ul className="list-none">
-                                    <li className="text-gray-600 text-base lg:text-lg">
-                                        It has a 4 Liter capacity
-                                    </li>
-                                    <li className="text-gray-600 text-base lg:text-lg">
-                                        It comes in all colors
-                                    </li>
-                                    <li className="text-gray-600 text-base lg:text-lg">
-                                        It is compatible with Brita classic, Brita Maxtra, Maxtra+, Bluetech filters.
-                                    </li>
-                                    <li className="text-gray-600 text-base lg:text-lg">
-                                        For more details send us an inquiry
-                                    </li>
-                                </ul>
+                                {productDetails?.specification ?
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{productDetails.specification}</ReactMarkdown> :
+                                    <div className="h-40 w-full bg-gray-300 animate-pulse rounded-xl" />
+                                }
                             </div>
                         </div>
                     </div>
@@ -162,7 +154,7 @@ const Product = () => {
                         ))}
                     </> : <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
                         {[...Array(10)].map((_, i) => (
-                            <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow animate__delay-1s">
+                            <div key={'demo' + i} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow animate__delay-1s">
                                 <div
                                     className="transform h-72 bg-gray-300 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
                                 />
