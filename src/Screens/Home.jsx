@@ -161,10 +161,23 @@ const Home = () => {
 
                                 </OwlCarousel>
                                 : <OwlCarousel {...carousel2} className="owl-theme">
-                                    <div className="item h-82 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block w-full relative group animate__animated animate__fadeIn wow animate__delay-1s">
-                                        <div
-                                            className="transform h-full bg-gray-300 scale-100 group-hover:scale-110 transition duration-150 ease-in-out"
-                                        />
+                                    <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row items-center transform scale-100 hover:scale-105 transition duration-200 h-40 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
+                                        <div className="h-16 w-16 mr-3 rounded-full bg-secondary animate-pulse">
+                                            <span />
+                                        </div>
+                                        <h1 className="text-lg font-bold text-center text-secondary uppercase h-6 w-auto bg-secondary animate-pulse">Lorem ipsum dolor.</h1>
+                                    </div>
+                                    <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row items-center transform scale-100 hover:scale-105 transition duration-200 h-40 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
+                                        <div className="h-16 w-16 mr-3 rounded-full bg-secondary animate-pulse">
+                                            <span />
+                                        </div>
+                                        <h1 className="text-lg font-bold text-center text-secondary uppercase h-6 w-auto bg-secondary animate-pulse">Lorem ipsum dolor.</h1>
+                                    </div>
+                                    <div className="bg-primary mx-3 lg:w-80 w-auto border rounded-tl-2xl py-5 lg:py-11 px-3 lg:px-7 rounded-br-2xl flex flex-row items-center transform scale-100 hover:scale-105 transition duration-200 h-40 ease-in-out mb-3 animate__animated animate__fadeInDown wow">
+                                        <div className="h-16 w-16 mr-3 rounded-full bg-secondary animate-pulse">
+                                            <span />
+                                        </div>
+                                        <h1 className="text-lg font-bold text-center text-secondary uppercase h-6 w-auto bg-secondary animate-pulse">Lorem ipsum dolor.</h1>
                                     </div>
                                 </OwlCarousel>}
 
