@@ -30,7 +30,7 @@ const Home = () => {
             const { data: newModels } = await getNewModelProducts();
 
             setNewModelProducts(newModels);
-            setLatestFilters(filtersData[0].attributes.products.data);
+            setLatestFilters(filtersData[0]);
             setSections(sectionsData.attributes.sections.sort());
             setTestimonials(testimonialData);
             setBulletCards(cards);
@@ -51,6 +51,9 @@ const Home = () => {
         })
 
     }, []);
+
+    console.log(latestFilters.attributes?.products?.data)
+
 
     let carousel1 = {
         items: 1,
@@ -244,21 +247,27 @@ const Home = () => {
 
                         </div>
 
-                        {latestFilters && latestFilters.length ? <>
+                        {latestFilters.attributes?.products?.data && latestFilters.attributes?.products?.data.length ? <>
                             <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
-                                {latestFilters.map((item) => (
+                                {latestFilters.attributes?.products?.data.map((item) => (
                                     <div key={item.id} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow">
-                                        <img
-                                            className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
-                                            src={item.attributes.images.data[0].attributes.url} alt={item.attributes.name}
-                                        />
+                                        {item.attributes.images.data ?
+                                            <img
+                                                className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
+                                                src={item.attributes.images.data[0].attributes.url} alt={item.attributes.name}
+                                            /> :
+                                            <img
+                                                className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
+                                                src='/images/image-error.png' alt='error'
+                                            />
+                                        }
 
-                                        <h1 className="flex absolute bottom-0 py-3 text-white w-full bg-primary text-xl justify-center items-center">
+                                        <h1 className="flex px-4 py-4 custom-line-clamp-2 absolute bottom-0 text-white w-full bg-primary text-sm justify-center items-center">
                                             {item.attributes.name}
                                         </h1>
 
                                         <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                            <Link to={`/products/${item.id}`} className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                            <Link to={`/products/${latestFilters.attributes?.link}/${item.attributes.code}`} className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
                                                 <i className="bi bi-eye-fill text-xl px-3"></i>
                                             </Link>
                                         </div>

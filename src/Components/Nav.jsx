@@ -93,14 +93,24 @@ const Nav = () => {
                                     if (currentNav === (category.attributes.link)) {
                                         return (
                                             <>
-                                                {category.attributes.products.data.slice(0, 4).map(product => (
+                                                {category.attributes.products.data.slice(0, 3).map(product => (
                                                     <div className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group ">
-                                                        <img
+                                                        {product.attributes.images.data ?
+                                                            <img
+                                                                className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
+                                                                src={product.attributes.images.data[0].attributes.url} alt={product.attributes.images.data[0].attributes.alternativeText}
+                                                            /> :
+                                                            <img
+                                                                className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
+                                                                src='/images/image-error.png' alt="not-found"
+                                                            />
+                                                        }
+                                                        {/* <img
                                                             className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
                                                             src={product.attributes.images.data[0].attributes.url} alt={product.attributes.images.data[0].attributes.alternativeText}
-                                                        />
+                                                        /> */}
 
-                                                        <h1 className="flex absolute bottom-0 py-3 text-white w-full bg-primary text-xl justify-center items-center">
+                                                        <h1 className="flex px-4 py-4 custom-line-clamp-2 absolute bottom-0 text-white w-full bg-primary text-sm justify-center items-center">
                                                             {product.attributes.name}
                                                         </h1>
 

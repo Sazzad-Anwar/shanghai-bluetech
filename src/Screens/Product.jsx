@@ -132,15 +132,21 @@ const Product = () => {
                 <div className="container mx-auto">
                     <h1 className="text-2xl text-gray-600 lg:text-3xl font-bold text-left">Related Products</h1>
                     {relatedProducts.length ? <>
-                        {relatedProducts.map((product) => (
-                            <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
+                        <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
+                            {relatedProducts.map((product) => (
                                 <div key={product.attributes.name} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow">
-                                    <img
-                                        className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
-                                        src={product.attributes.images.data[0].attributes.formats.thumbnail.url} alt={product.attributes.images.data[0].attributes.alternativeText}
-                                    />
+                                    {product.attributes.images.data ?
+                                        <img
+                                            className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
+                                            src={product.attributes.images.data[0].attributes.url} alt={product.attributes.name}
+                                        /> :
+                                        <img
+                                            className="transform scale-100 h-80 group-hover:scale-110 transition duration-150 ease-in-out"
+                                            src='/images/image-error.png' alt='error'
+                                        />
+                                    }
 
-                                    <h1 className="flex absolute bottom-0 py-3 text-white w-full bg-primary text-xl justify-center items-center">
+                                    <h1 className="flex px-4 py-4 custom-line-clamp-2 absolute bottom-0 text-white w-full bg-primary text-sm justify-center items-center">
                                         {product.attributes.name}
                                     </h1>
 
@@ -150,8 +156,8 @@ const Product = () => {
                                         </Link>
                                     </div>
                                 </div>
-                            </OwlCarousel>
-                        ))}
+                            ))}
+                        </OwlCarousel>
                     </> : <OwlCarousel {...carousel3} className="owl-theme w-full my-10">
                         {[...Array(10)].map((_, i) => (
                             <div key={'demo' + i} className="item h-82 w-63 carousel-img border rounded-2xl shadow-2xl overflow-hidden mx-auto flex flex-col justify-center items-center lg:block lg:w-auto relative group animate__animated animate__fadeIn wow animate__delay-1s">

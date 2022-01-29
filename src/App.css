@@ -33,6 +33,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.custom-line-clamp-2 {
+    -webkit-line-clamp: 2;
+}
+
 html {
     scroll-behavior: smooth;
 }
