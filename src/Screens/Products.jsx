@@ -62,7 +62,7 @@ const Products = () => {
                                     </h1>
 
                                     <div className="absolute inset-0 rounded-lg bg-blurBg opacity-0 group-hover:opacity-100 flex justify-center items-center transition duration-200 ease-in-out">
-                                        <Link to={`/products/${category}/${product.attributes.code}`} className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
+                                        <Link to={`/products/${product.attributes.caetgories?.data[0]?.attributes.link}/${product.attributes.code}`} className="flex items-center rounded-lg shadow-lg hover:text-white px-3 py-2 bg-primary text-white">
                                             <i className="bi bi-eye-fill text-xl px-3"></i>
                                         </Link>
                                     </div>
