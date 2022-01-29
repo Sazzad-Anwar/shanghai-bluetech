@@ -1,10 +1,13 @@
-import { Input, Tooltip } from 'antd';
+import { Input, Tooltip, Select, message } from 'antd';
 import { Link } from 'react-router-dom';
 import Nav from './Nav';
 import { CopyrightOutlined, LoadingOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react';
 import { getCategories, getCompanyAddress, getMetaTags, sendMsg } from '../Api';
 import { Helmet } from "react-helmet";
+import PopUpModal from './PopUpModal';
+import { countryCode } from './CountryCode';
+const { Option } = Select;
 
 const { TextArea } = Input;
 
@@ -13,9 +16,20 @@ const Layout = ({ children, className }) => {
     const [companyAddress, setCompanyAddress] = useState({})
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+    const [phone, setPhone] = useState('');
+    const [companyName, setCompanyName] = useState('');
+    const [companySite, setCompanySite] = useState('');
+    const [selectedCountryCode, setSelectedCountryCode] = useState('');
+    const [country, setCountry] = useState('');
+    const [interestedProducts, setInterestedProducts] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [metaTags, setMetaTags] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+
+    const selectCountryCode = value => {
+        setSelectedCountryCode(value);
+        setCountry(countryCode.filter(item => item.dial_code === value)[0].name);
+    }
 
     let goTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -32,22 +46,44 @@ const Layout = ({ children, className }) => {
         }
 
         getAPIdata();
+
+        let showPopup = setTimeout(() => {
+            setShowModal(true)
+        }, 10 * 1000)
+
+        return () => {
+            clearTimeout(showPopup);
+        }
+
     }, [])
+
+    const success = () => {
+        message.success('Message is sent to supplier.');
+    };
 
     const sendMessage = (e) => {
         e.preventDefault();
         const data = {
             name,
             email,
-            query: message
+            phone: selectedCountryCode + phone,
+            Country: country,
+            CompanyName: companyName,
+            CompanySite: companySite,
+            InterestedProducts: interestedProducts,
         }
         setIsDisabled(true);
-        if (name && email && message) {
+        if (name && email && phone) {
             sendMsg(data).then(() => {
                 setName('');
                 setEmail('');
-                setMessage("");
+                setPhone('');
+                setCountry('');
+                setCompanyName('');
+                setCompanySite('');
+                setInterestedProducts('');
                 setIsDisabled(false);
+                success();
             })
         }
 
@@ -62,21 +98,61 @@ const Layout = ({ children, className }) => {
                 ))}
             </Helmet>
             <Nav />
+            <PopUpModal setShowModal={setShowModal} showModal={showModal}>
+                {/* email to supplier */}
+                <div className="flex justify-center items-center animate__animated animate__fadeIn wow animate__delay-1s">
+                    <form onSubmit={sendMessage} className="bg-white p-4 lg:p-8 shadow-xl rounded-xl w-[37.5rem] mx-auto px-8">
+                        <h1 className="text-xl lg:text-3xl font-bold text-center animate__animated animate__fadeIn wow">Send Message To Supplier</h1>
+                        <Input value={name} onChange={e => setName(e.target.value)} required type='text' className="my-3 py-3" placeholder="Name" />
+                        <Input value={email} onChange={e => setEmail(e.target.value)} required type="email" className="my-3 py-3" placeholder="Email" />
+                        <div className='flex items-center w-full'>
+                            <Select size='large' placeholder="Country Code" className='my-3 py-3' style={{ width: 200, borderRight: 'none' }} onChange={selectCountryCode}>
+                                {countryCode && countryCode.map(country => (
+                                    <Option key={country.dial_code} value={country.dial_code}>{country.name}</Option>
+                                ))}
+                            </Select>
+                            <Input type='tel' size='large' required value={phone} onChange={e => setPhone(e.target.value)} className='' style={{
+                                borderLeft: 'none',
+                            }} placeholder="Phone Number" />
+                        </div>
+                        <Input value={country} onChange={e => setCountry(e.target.value)} type="text" className="my-3 py-3" placeholder="Country" />
+                        <Input value={companyName} onChange={e => setCompanyName(e.target.value)} type="text" className="my-3 py-3" placeholder="Company Name" />
+                        <Input value={companySite} onChange={e => setCompanySite(e.target.value)} type="url" className="my-3 py-3" placeholder="Company Website" />
+                        <TextArea value={interestedProducts} onChange={e => setInterestedProducts(e.target.value)} className="my-3 py-3" placeholder="Please inform us about your question or query" autoSize />
+                        <button disabled={isDisabled} type="submit" className="my-3 py-2 px-3 text-base text-white bg-primary hover:bg-blue-400 outline-none shadow transition duration-300 ease-in-out">
+                            {isDisabled ? <> <LoadingOutlined /> Sending...</> : <>Send <i className="bi bi-send-fill pl-2"></i></>}
+                        </button>
+                    </form>
+                </div>
+            </PopUpModal>
             {children}
 
             {/* email to supplier */}
-            <section className="py-20 backdrop-blur-lg relative" style={{
+            <section className="pt-20 pb-32 backdrop-blur-lg relative" style={{
                 background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/banner-2.png) no-repeat center center',
                 backgroundSize: 'cover',
                 backgroundAttachment: 'fixed'
             }}>
                 <div className="container mx-auto">
-                    <h1 className="text-xl lg:text-3xl font-bold text-center text-white animate__animated animate__fadeIn wow">Send Message To Supplier</h1>
+                    <h1 className="text-xl lg:text-3xl font-bold text-center mb-5 text-white animate__animated animate__fadeIn wow">Send Message To Supplier</h1>
                     <div className="flex justify-center items-center mb-10 animate__animated animate__fadeIn wow animate__delay-1s">
-                        <form onSubmit={sendMessage} className="bg-white my-6 lg:my-20 p-4 lg:p-8 shadow-xl border rounded-xl">
-                            <Input value={name} onChange={e => setName(e.target.value)} type='text' className="my-3 py-3" placeholder="Name" />
-                            <Input value={email} onChange={e => setEmail(e.target.value)} type="email" className="my-3 py-3" placeholder="Email" />
-                            <TextArea value={message} onChange={e => setMessage(e.target.value)} className="my-3 py-3" placeholder="Please inform us about your question" autoSize />
+                        <form onSubmit={sendMessage} className="bg-white p-4 lg:p-8 shadow-xl rounded-xl w-[37.5rem] mx-auto px-8">
+                            <Input value={name} onChange={e => setName(e.target.value)} required type='text' className="my-3 py-3" placeholder="Name" />
+                            <Input value={email} onChange={e => setEmail(e.target.value)} required type="email" className="my-3 py-3" placeholder="Email" />
+                            <div className='flex items-center w-full'>
+                                <Select size='large' placeholder="Country Code" className='my-3 py-3' style={{ width: 200, borderRight: 'none' }} onChange={selectCountryCode}>
+                                    {countryCode && countryCode.map(country => (
+                                        <Option key={country.dial_code} value={country.dial_code}>{country.name}</Option>
+                                    ))}
+                                </Select>
+                                <Input type='tel' size='large' required value={phone} onChange={e => setPhone(e.target.value)} className='' style={{
+                                    borderLeft: 'none',
+                                }} placeholder="Phone Number" />
+                            </div>
+                            <Input value={country} onChange={e => setCountry(e.target.value)} type="text" className="my-3 py-3" placeholder="Country" />
+                            <Input value={companyName} onChange={e => setCompanyName(e.target.value)} type="text" className="my-3 py-3" placeholder="Company Name" />
+                            <Input value={companySite} onChange={e => setCompanySite(e.target.value)} type="url" className="my-3 py-3" placeholder="Company Website" />
+                            <TextArea value={interestedProducts} onChange={e => setInterestedProducts(e.target.value)} className="my-3 py-3" placeholder="Please inform us about your question or query" autoSize />
                             <button disabled={isDisabled} type="submit" className="my-3 py-2 px-3 text-base text-white bg-primary hover:bg-blue-400 outline-none shadow transition duration-300 ease-in-out">
                                 {isDisabled ? <> <LoadingOutlined /> Sending...</> : <>Send <i className="bi bi-send-fill pl-2"></i></>}
                             </button>
