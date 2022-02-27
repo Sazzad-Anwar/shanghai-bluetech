@@ -5,13 +5,13 @@ import { CopyrightOutlined, LoadingOutlined } from '@ant-design/icons'
 import { useEffect, useState } from 'react';
 import { getCategories, getCompanyAddress, getMetaTags, sendMsg } from '../Api';
 import { Helmet } from "react-helmet";
-import PopUpModal from './PopUpModal';
 import { countryCode } from './CountryCode';
+import InquiryModal from './InquiryModal';
 const { Option } = Select;
 
 const { TextArea } = Input;
 
-const Layout = ({ children, className }) => {
+const Layout = ({ children, className, showPopUp }) => {
     const [categories, setCategories] = useState([]);
     const [companyAddress, setCompanyAddress] = useState({})
     const [name, setName] = useState('');
@@ -24,7 +24,7 @@ const Layout = ({ children, className }) => {
     const [interestedProducts, setInterestedProducts] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [metaTags, setMetaTags] = useState([]);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(showPopUp ?? false);
 
     const selectCountryCode = value => {
         setSelectedCountryCode(value);
@@ -47,19 +47,20 @@ const Layout = ({ children, className }) => {
 
         getAPIdata();
 
-        let showPopup = setTimeout(() => {
-            setShowModal(true)
-        }, 10 * 1000)
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        return () => {
-            clearTimeout(showPopup);
+
+        if (!localStorage.getItem('popupClosed')) {
+
+            let showPopup = setTimeout(() => {
+                setShowModal(true)
+            }, 30 * 1000)
+
+            return () => {
+                clearTimeout(showPopup);
+            }
         }
-
     }, [])
-
-    const success = () => {
-        message.success('Message is sent to supplier.');
-    };
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -89,6 +90,10 @@ const Layout = ({ children, className }) => {
 
     }
 
+    const success = () => {
+        message.success('Message is sent to supplier.');
+    };
+
     return (
         <div className={className}>
             <Helmet>
@@ -98,33 +103,7 @@ const Layout = ({ children, className }) => {
                 ))}
             </Helmet>
             <Nav />
-            <PopUpModal setShowModal={setShowModal} showModal={showModal}>
-                {/* email to supplier */}
-                <div className="flex justify-center items-center animate__animated animate__fadeIn wow animate__delay-1s">
-                    <form onSubmit={sendMessage} className="bg-white p-4 lg:p-8 shadow-xl rounded-xl w-[37.5rem] mx-auto px-8">
-                        <h1 className="text-xl lg:text-3xl font-bold text-center animate__animated animate__fadeIn wow">Send Message To Supplier</h1>
-                        <Input value={name} onChange={e => setName(e.target.value)} required type='text' className="my-3 py-3" placeholder="Name" />
-                        <Input value={email} onChange={e => setEmail(e.target.value)} required type="email" className="my-3 py-3" placeholder="Email" />
-                        <div className='flex items-center w-full'>
-                            <Select size='large' placeholder="Country Code" className='my-3 py-3' style={{ width: 200, borderRight: 'none' }} onChange={selectCountryCode}>
-                                {countryCode && countryCode.map(country => (
-                                    <Option key={country.dial_code} value={country.dial_code}>{country.name}</Option>
-                                ))}
-                            </Select>
-                            <Input type='tel' size='large' required value={phone} onChange={e => setPhone(e.target.value)} className='' style={{
-                                borderLeft: 'none',
-                            }} placeholder="Phone Number" />
-                        </div>
-                        <Input value={country} onChange={e => setCountry(e.target.value)} type="text" className="my-3 py-3" placeholder="Country" />
-                        <Input value={companyName} onChange={e => setCompanyName(e.target.value)} type="text" className="my-3 py-3" placeholder="Company Name" />
-                        <Input value={companySite} onChange={e => setCompanySite(e.target.value)} type="url" className="my-3 py-3" placeholder="Company Website" />
-                        <TextArea value={interestedProducts} onChange={e => setInterestedProducts(e.target.value)} className="my-3 py-3" placeholder="Please inform us about your question or query" autoSize />
-                        <button disabled={isDisabled} type="submit" className="my-3 py-2 px-3 text-base text-white bg-primary hover:bg-blue-400 outline-none shadow transition duration-300 ease-in-out">
-                            {isDisabled ? <> <LoadingOutlined /> Sending...</> : <>Send <i className="bi bi-send-fill pl-2"></i></>}
-                        </button>
-                    </form>
-                </div>
-            </PopUpModal>
+            <InquiryModal setShowModal={setShowModal} showModal={showModal} />
             {children}
 
             {/* email to supplier */}

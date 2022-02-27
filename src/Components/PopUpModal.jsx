@@ -20,7 +20,13 @@ const PopUpModal = ({ children, setShowModal, showModal, className }) => {
                 <div className="">
                     <div style={{ maxHeight: height }} className="w-11/12 border border-[#6AC9F3] rounded-lg shadow-lg h-auto bg-transparent z-30 overflow-auto relative">
                         {children}
-                        <div onClick={() => setShowModal(false)} className="h-14 w-14 absolute right-0 top-0 flex justify-center items-center bg-primary cursor-pointer">
+                        <div
+                            onClick={() => {
+                                setShowModal(false);
+                                localStorage.setItem('popupClosed', true);
+                            }}
+                            className="h-14 w-14 absolute right-0 top-0 flex justify-center items-center bg-primary cursor-pointer"
+                        >
                             <CloseOutlined className="text-center text-white" />
                         </div>
                     </div>

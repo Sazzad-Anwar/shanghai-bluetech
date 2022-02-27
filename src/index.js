@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

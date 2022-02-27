@@ -114,7 +114,7 @@ const Home = () => {
                 loop: true
             },
             1300: {
-                items: 5,
+                items: 4,
                 loop: true
             },
             1600: {
@@ -147,7 +147,7 @@ const Home = () => {
                     </div>
 
                     <div className="absolute inset-0 z-10 lg:block hidden">
-                        <div className="flex justify-center items-end lg:ml-40 lg:mr-40 xl:ml-80 xl:mr-80 w-full lg:w-auto h-full">
+                        <div className="container mx-auto flex items-end lg:w-full h-full">
                             {bulletCards && bulletCards.length ?
                                 <OwlCarousel {...carousel2} className="owl-theme">
                                     {bulletCards.map(card => (

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { categoryProducts, getProductDetails } from '../Api';
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import InquiryModal from '../Components/InquiryModal';
 
 const Product = () => {
 
@@ -17,6 +18,8 @@ const Product = () => {
     const [productDetails, setProductDetails] = useState({});
     const [images, setImages] = useState([]);
     const [relatedProducts, setRelatedProducts] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [popUpData, setPopUpData] = useState({});
 
     useEffect(() => {
         const getAPIdata = async () => {
@@ -70,6 +73,11 @@ const Product = () => {
     return (
         <Layout>
             <Breadcrumb title={product} cateogry={category} setProductCategory={setProductCategory} setPageTitle={setPageTitle} />
+            <InquiryModal
+                setShowModal={setShowModal}
+                showModal={showModal}
+                popUpData={popUpData}
+            />
             <section className="my-10">
                 <div className="container mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -121,6 +129,15 @@ const Product = () => {
                                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{productDetails.specification}</ReactMarkdown> :
                                     <div className="h-40 w-full bg-gray-300 animate-pulse rounded-xl" />
                                 }
+                            </div>
+
+                            <div className='mt-10'>
+                                <button onClick={() => {
+                                    setShowModal(true);
+                                    setPopUpData(productDetails && productDetails)
+                                }} className='px-4 py-4 bg-[#66c6dc] text-white rounded-lg hover:shadow-xl transition duration-200 ease-in'>
+                                    Inquiry about this product
+                                </button>
                             </div>
                         </div>
                     </div>
