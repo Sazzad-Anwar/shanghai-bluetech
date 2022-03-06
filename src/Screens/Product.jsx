@@ -60,7 +60,7 @@ const Product = () => {
                 loop: true
             },
             1300: {
-                items: 5,
+                items: 4,
                 loop: true
             },
             1600: {
