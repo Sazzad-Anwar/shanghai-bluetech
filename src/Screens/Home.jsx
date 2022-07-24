@@ -132,7 +132,7 @@ const Home = () => {
                         <OwlCarousel className='owl-theme' {...carousel1}>
                             {sliders.map((slider) => (
                                 <div key={slider.attributes.formats.large.url} className='item'>
-                                    <img src={slider.attributes.formats.large.url} alt={slider.attributes.alternativeText} className="h-screen w-auto" width="100%" />
+                                    <img src={slider.attributes.formats.large.url} alt={slider.attributes.alternativeText} className="h-auto w-auto" width="100%" />
                                 </div>
                             ))}
                         </OwlCarousel>
@@ -146,7 +146,7 @@ const Home = () => {
                         </svg>
                     </div>
 
-                    <div className="absolute inset-0 z-10 lg:block hidden">
+                    <div className="absolute left-0 right-0 bottom-0 lg:bottom-[135px] w-full z-10 lg:block hidden">
                         <div className="container mx-auto flex items-end lg:w-full h-full">
                             {bulletCards && bulletCards.length ?
                                 <OwlCarousel {...carousel2} className="owl-theme">
